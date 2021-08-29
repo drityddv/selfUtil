@@ -1,8 +1,5 @@
 package common;
 
-import common.CollectionUtils;
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author xiaozhang
@@ -36,11 +36,16 @@ public class FileUtils {
         return result;
     }
 
-    public static List<File> filter(Collection<File> files, Predicate<? super File> predicate) {
+    public static List<File> filter(Collection<File> files, Predicate<? super File>... predicate) {
         if (CollectionUtils.isEmpty(files)) {
             return Collections.emptyList();
         }
-
-        return files.stream().filter(predicate).collect(Collectors.toList());
+        Stream<File> fileStream = files.stream();
+        if (predicate != null) {
+            for (Predicate<? super File> predicate1 : predicate) {
+                fileStream = fileStream.filter(predicate1);
+            }
+        }
+        return fileStream.collect(Collectors.toList());
     }
 }
