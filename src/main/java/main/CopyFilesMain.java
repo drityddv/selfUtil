@@ -1,10 +1,10 @@
 package main;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
-import common.FileUtils;
+import com.google.common.hash.BloomFilter;
+import com.google.common.hash.Funnels;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,15 +15,21 @@ import lombok.extern.slf4j.Slf4j;
 public class CopyFilesMain {
 
     public static void main(String[] args) throws IOException {
+        BloomFilter<Integer> bloomFilter = BloomFilter.create(Funnels.integerFunnel(), Integer.MAX_VALUE);
 
-        String filePath = CopyFilesMain.class.getClassLoader().getResource("").getFile();
-        List<File> files = FileUtils.scanFileDepth(new File(filePath));
+        long lastInsertAt = 0L;
+        int totalSize = 10000 * 100;
+        for (int i = 0; i < totalSize; i = i + 2) {
+            bloomFilter.put(i);
+            log.info("添加:{} 耗时:{}", i, System.currentTimeMillis() - lastInsertAt);
+            lastInsertAt = System.currentTimeMillis();
+        }
 
-        files = FileUtils.filter(files, file -> file.getName().endsWith(".lrtemplate"));
-
-        for (File file : files) {
-            // log.info("file {}", file.getAbsolutePath());
-            org.apache.commons.io.FileUtils.copyFileToDirectory(file, new File("/Users/ddv/Desktop/out/"));
+        for (int i = 0; i < totalSize; i++) {
+            boolean contain = bloomFilter.mightContain(i);
+            if (contain && i % 2 == 1) {
+                log.info("number:{} hit", i);
+            }
         }
     }
 }
