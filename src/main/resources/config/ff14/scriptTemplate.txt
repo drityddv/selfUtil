@@ -1,0 +1,11 @@
+Delay 1000
+KeyPress "Num 0", 1
+Delay 1000
+KeyPress "Num 0", 1
+Delay 1000
+KeyPress "Num 0", 1
+Delay 1000
+KeyPress "B", 1
+Delay param
+KeyPress "X", 1
+Delay param

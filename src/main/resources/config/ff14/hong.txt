@@ -1,0 +1,11 @@
+/ac "制作" <wait.3>
+/ac "制作" <wait.3>
+/ac "制作" <wait.3>
+/ac "制作" <wait.3>
+/echo 宏 #1 已完成！<se.14>
+
+/ac "制作" <wait.1>
+/ac "制作" <wait.2>
+/ac "制作" <wait.3>
+/ac "制作" <wait.4>
+/echo 宏 #2 已完成！<se.14>

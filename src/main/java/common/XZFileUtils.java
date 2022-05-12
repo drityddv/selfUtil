@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class XZFileUtils {
 
     public static void main(String[] args) throws Exception {
-        copyFile("/Users/ddv/Movies/se03", "/Users/ddv/Movies/se03/video",
+        copyFile("/Users/ddv/Movies/se04", "/Users/ddv/Movies/se04",
             file -> file.getName().endsWith(".mkv"));
     }
 
