@@ -15,21 +15,23 @@ import lombok.extern.slf4j.Slf4j;
 public class CopyFilesMain {
 
     public static void main(String[] args) throws IOException {
-        BloomFilter<Integer> bloomFilter = BloomFilter.create(Funnels.integerFunnel(), Integer.MAX_VALUE);
+		//获取系统类加载器 sun.misc.Launcher$AppClassLoader@18b4aac2
+		ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+		System.out.println(systemClassLoader);
 
-        long lastInsertAt = 0L;
-        int totalSize = 10000 * 100;
-        for (int i = 0; i < totalSize; i = i + 2) {
-            bloomFilter.put(i);
-            log.info("添加:{} 耗时:{}", i, System.currentTimeMillis() - lastInsertAt);
-            lastInsertAt = System.currentTimeMillis();
-        }
+		//获取拓展类加载器 sun.misc.Launcher$ExtClassLoader@14ae5a5
+		ClassLoader extClassLoader = systemClassLoader.getParent();
+		System.out.println(extClassLoader);
 
-        for (int i = 0; i < totalSize; i++) {
-            boolean contain = bloomFilter.mightContain(i);
-            if (contain && i % 2 == 1) {
-                log.info("number:{} hit", i);
-            }
-        }
+		//获取根类加载器 null
+		ClassLoader bootstrapClassLoader = extClassLoader.getParent();
+		System.out.println(bootstrapClassLoader);
+
+		//用户自定类加载器 sun.misc.Launcher$AppClassLoader@18b4aac2(使用系统加载器进行加载)
+		ClassLoader classLoader = CopyFilesMain.class.getClassLoader();
+		System.out.println(classLoader);
+		//获取string 类加载器 null(使用引导类加载器)java核心都是使用该种加载方式
+		ClassLoader stringClassLoader = String.class.getClassLoader();
+		System.out.println(stringClassLoader);
     }
 }
