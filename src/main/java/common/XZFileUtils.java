@@ -22,13 +22,18 @@ import lombok.extern.slf4j.Slf4j;
 public class XZFileUtils {
 
     public static void main(String[] args) throws Exception {
-        copyFile("/Users/ddv/Movies/se04", "/Users/ddv/Movies/se04",
-            file -> file.getName().endsWith(".mkv"));
+        String src = "/Users/ddv/Downloads";
+        String target = "/Users/ddv/Movies/saul";
+        copyFile(src, target, file -> file.getName().endsWith("chs.eng.mp4"));
     }
 
     public static void copyFile(String source, String target, Predicate<File> filter) throws Exception {
         File sourceFile = new File(source);
         File targetFile = new File(target);
+
+        if (!targetFile.exists()) {
+            targetFile.mkdir();
+        }
 
         if (!sourceFile.isDirectory() || !targetFile.isDirectory()) {
             log.warn("文件夹路径有误! {} {}", source, target);
