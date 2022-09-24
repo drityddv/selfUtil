@@ -26,16 +26,16 @@ public class TreeSupport {
     */
 
     // 用于获得树的层数
-    public static int getTreeDepth(TreeNode root) {
-        return root == null ? 0 : (1 + Math.max(getTreeDepth(root.leftNode), getTreeDepth(root.rightNode)));
+    public static int getTreeDepth(XTreeNode root) {
+        return root == null ? 0 : (1 + Math.max(getTreeDepth(root.left), getTreeDepth(root.right)));
     }
 
-    private static void writeArray(TreeNode currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
+    private static void writeArray(XTreeNode currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
         // 保证输入的树不为空
         if (currNode == null)
             return;
         // 先将当前节点保存到二维数组中
-        res[rowIndex][columnIndex] = String.valueOf(currNode.value);
+        res[rowIndex][columnIndex] = String.valueOf(currNode.val);
 
         // 计算当前位于树的第几层
         int currLevel = ((rowIndex + 1) / 2);
@@ -46,19 +46,19 @@ public class TreeSupport {
         int gap = treeDepth - currLevel - 1;
 
         // 对左儿子进行判断，若有左儿子，则记录相应的"/"与左儿子的值
-        if (currNode.leftNode != null) {
+        if (currNode.left != null) {
             res[rowIndex + 1][columnIndex - gap] = "/";
-            writeArray(currNode.leftNode, rowIndex + 2, columnIndex - gap * 2, res, treeDepth);
+            writeArray(currNode.left, rowIndex + 2, columnIndex - gap * 2, res, treeDepth);
         }
 
         // 对右儿子进行判断，若有右儿子，则记录相应的"\"与右儿子的值
-        if (currNode.rightNode != null) {
+        if (currNode.right != null) {
             res[rowIndex + 1][columnIndex + gap] = "\\";
-            writeArray(currNode.rightNode, rowIndex + 2, columnIndex + gap * 2, res, treeDepth);
+            writeArray(currNode.right, rowIndex + 2, columnIndex + gap * 2, res, treeDepth);
         }
     }
 
-    public static void show(TreeNode root) {
+    public static void show(XTreeNode root) {
         if (root == null)
             System.out.println("EMPTY!");
         // 得到树的深度
@@ -93,96 +93,102 @@ public class TreeSupport {
         }
     }
 
-    public static TreeNode<Integer> makeTree(int nodeSize) {
+    public static XTreeNode<Integer> makeTree(int nodeSize) {
         List<Integer> randomUnRepeated = RandomUtils.randomUnRepeated(nodeSize);
         return makeTree(randomUnRepeated);
     }
 
-    public static TreeNode<Integer> makeTree(List<Integer> treeValues) {
+    public static XTreeNode<Integer> makeTree(List<Integer> treeValues) {
         if (CollectionUtils.isEmpty(treeValues)) {
             throw new UnsupportedOperationException("treeValues size must be greater than zero");
         }
-        TreeNode<Integer> headNode = null;
+        log.info("values order {}", treeValues);
+        LinkedList<XTreeNode<Integer>> waitNodes = new LinkedList<>();
+        XTreeNode<Integer> headNode = null;
         for (Integer nodeValue : treeValues) {
             if (headNode == null) {
-                headNode = TreeNode.of(nodeValue, null, null);
+                headNode = XTreeNode.of(nodeValue, null, null);
+                waitNodes.addLast(headNode);
                 continue;
             }
-            headNode.addNode(nodeValue);
+            waitNodes.removeIf(XTreeNode::isFull);
+            XTreeNode<Integer> nodesFirst = waitNodes.getFirst();
+            XTreeNode<Integer> newNode = nodesFirst.addNode(nodeValue);
+            waitNodes.addLast(newNode);
         }
         return headNode;
     }
 
     // 深度优先递归
-    public static void dfsRecursion(TreeNode node, List<Object> result) {
+    public static void dfsRecursion(XTreeNode node, List<Object> result) {
         if (node == null) {
             return;
         }
-        result.add(node.value);
-        dfsRecursion(node.leftNode, result);
-        dfsRecursion(node.rightNode, result);
+        result.add(node.val);
+        dfsRecursion(node.left, result);
+        dfsRecursion(node.right, result);
     }
 
     // 深度优先
-    public static void dfs(TreeNode<?> node, List<Object> result) {
+    public static void dfs(XTreeNode<?> node, List<Object> result) {
         if (node == null) {
             return;
         }
-        Stack<TreeNode<?>> stack = new Stack<>();
+        Stack<XTreeNode<?>> stack = new Stack<>();
         stack.push(node);
         while (!stack.isEmpty()) {
-            TreeNode<?> pop = stack.pop();
-            result.add(pop.value);
-            if (pop.rightNode != null) {
-                stack.push(pop.rightNode);
+            XTreeNode<?> pop = stack.pop();
+            result.add(pop.val);
+            if (pop.right != null) {
+                stack.push(pop.right);
             }
-            if (pop.leftNode != null) {
-                stack.push(pop.leftNode);
+            if (pop.left != null) {
+                stack.push(pop.left);
             }
         }
     }
 
     // 广度优先递归
-    public static void bfsRecursion(TreeNode node, List<Object> result) {
+    public static void bfsRecursion(XTreeNode node, List<Object> result) {
         if (node == null) {
             return;
         }
-        LinkedList<TreeNode<?>> queue = new LinkedList<>();
+        LinkedList<XTreeNode<?>> queue = new LinkedList<>();
         queue.add(node);
         doBfsRecursion(queue, result);
     }
 
-    private static void doBfsRecursion(LinkedList<TreeNode<?>> queue, List<Object> result) {
+    private static void doBfsRecursion(LinkedList<XTreeNode<?>> queue, List<Object> result) {
         if (queue.isEmpty()) {
             return;
         }
-        TreeNode<?> node = queue.pollFirst();
-        result.add(node.value);
-        if (node.leftNode != null) {
-            queue.add(node.leftNode);
+        XTreeNode<?> node = queue.pollFirst();
+        result.add(node.val);
+        if (node.left != null) {
+            queue.add(node.left);
         }
-        if (node.rightNode != null) {
-            queue.add(node.rightNode);
+        if (node.right != null) {
+            queue.add(node.right);
         }
         doBfsRecursion(queue, result);
     }
 
     // 广度优先
-    public static void bfs(TreeNode node, List<Object> result) {
+    public static void bfs(XTreeNode node, List<Object> result) {
         if (node == null) {
             return;
         }
-        LinkedList<TreeNode<?>> queue = new LinkedList<>();
+        LinkedList<XTreeNode<?>> queue = new LinkedList<>();
         queue.add(node);
 
         while (!queue.isEmpty()) {
             node = queue.pollFirst();
-            result.add(node.value);
-            if (node.leftNode != null) {
-                queue.add(node.leftNode);
+            result.add(node.val);
+            if (node.left != null) {
+                queue.add(node.left);
             }
-            if (node.rightNode != null) {
-                queue.add(node.rightNode);
+            if (node.right != null) {
+                queue.add(node.right);
             }
         }
     }

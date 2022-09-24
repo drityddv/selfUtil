@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
-import xiaozhang.algorithm.model.TreeNode;
 import xiaozhang.algorithm.model.TreeSupport;
+import xiaozhang.algorithm.model.XTreeNode;
 import xiaozhang.util.JsonUtils;
 
 /**
@@ -17,7 +17,7 @@ import xiaozhang.util.JsonUtils;
 public class AlgorithmUtil {
 
     public static void main(String[] args) {
-        TreeNode<Integer> headNode = TreeSupport.makeTree(15);
+        XTreeNode<Integer> headNode = TreeSupport.makeTree(15);
         TreeSupport.show(headNode);
 
         List<Object> result = new ArrayList<>();
