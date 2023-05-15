@@ -1,4 +1,4 @@
-package com.xiaozhang.ff.util;
+package com.xiaozhang.spring.service.ff.util;
 
 import java.io.File;
 import java.net.URL;
@@ -108,7 +108,28 @@ public class Ff14Util {
         FileUtils.writeLines(new File(SCRIPT), results, false);
     }
 
+    /**
+     * 计算机能cd
+     *
+     * @param minute 起始分钟数
+     * @param second 起始秒数
+     * @param cd 技能cd 单位s
+     */
+    public static void calcSkillCd(int minute, int second, int cd) {
+        for (int i = 0; i < 1; i++) {
+            long endTime = TimeUnit.MINUTES.toSeconds(minute) + second + cd;
+            long preTime = TimeUnit.MINUTES.toSeconds(minute) + second - cd;
+            log.info("当前 {}:{}", minute, second);
+            log.info("前置转好 {}:{}", preTime / TimeUnit.MINUTES.toSeconds(1), preTime % TimeUnit.MINUTES.toSeconds(1));
+            log.info("后置转好 {}:{}", endTime / TimeUnit.MINUTES.toSeconds(1), endTime % TimeUnit.MINUTES.toSeconds(1));
+            log.info("");
+            minute = (int)(endTime / TimeUnit.MINUTES.toSeconds(1));
+            second = (int)(endTime % TimeUnit.MINUTES.toSeconds(1));
+        }
+
+    }
+
     public static void main(String[] args) throws Exception {
-        generateScript();
+        calcSkillCd(5, 35, 120);
     }
 }

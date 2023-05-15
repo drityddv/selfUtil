@@ -1,4 +1,4 @@
-package com.xiaozhang.main.sb;
+package com.xiaozhang.spring;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -13,8 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class TestRunner implements CommandLineRunner {
+
     @Override
     public void run(String... args) throws Exception {
-        log.info("{}", getClass().getSimpleName());
+        log.info("TestRunner start...");
     }
 }
