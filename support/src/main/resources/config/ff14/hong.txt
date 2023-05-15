@@ -11,3 +11,6 @@
 /echo 宏 #2 已完成！<se.14>
 
 develop commit1
+
+fun1 commit1
+fun1 commit2
