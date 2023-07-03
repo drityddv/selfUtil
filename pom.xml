@@ -118,6 +118,16 @@
                 <version>${webmagic.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>4.4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>us.codecraft</groupId>
+                <artifactId>webmagic-selenium</artifactId>
+                <version>0.7.5</version>
+            </dependency>
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
@@ -164,7 +174,7 @@
         <mysql.version>8.0.23</mysql.version>
         <jedis.version>3.3.0</jedis.version>
 
-        <webmagic.version>0.7.3</webmagic.version>
+        <webmagic.version>0.7.4</webmagic.version>
 
         <lombok.version>1.18.20</lombok.version>
         <fastjson.version>1.2.61</fastjson.version>

@@ -1,14 +1,14 @@
 package com.xiaozhang.spring.service.ff.service;
 
+import com.xiaozhang.spring.config.XzProperties;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import com.xiaozhang.spring.config.XzProperties;
-
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import javax.sql.DataSource;
 
 /**
  * @author : xiaozhang
@@ -24,6 +24,9 @@ public class FinalFantasyService implements SmartLifecycle {
 
     @Autowired
     private XzProperties xzProperties;
+
+    @Autowired
+    private DataSource dataSource;
 
     @SneakyThrows
     @Override

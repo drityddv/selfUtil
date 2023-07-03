@@ -24,3 +24,5 @@
 *.ipr
 /out/
 /target/
+/logs统计.xlsx
+/report.txt
