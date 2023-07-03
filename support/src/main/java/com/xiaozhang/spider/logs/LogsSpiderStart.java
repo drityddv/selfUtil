@@ -67,7 +67,10 @@ public class LogsSpiderStart {
 
     public static void main(String[] args) throws Exception {
         File file = new File("report.txt");
-        String json = FileUtils.readFileToString(file);
+        String json = null;
+        if (file.exists()) {
+            json = FileUtils.readFileToString(file);
+        }
         boolean useCache = Boolean.parseBoolean(iniConfig.getOrDefault(IniKeyEnum.use_cache_html.name(), "false"));
         if (StringUtils.isEmpty(json) || !useCache) {
             extractFightUrls();
