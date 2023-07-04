@@ -89,7 +89,7 @@ public class LogsSpiderStart {
         log.info("即将写入excel...");
         File file = new File("logs统计.xlsx");
         if (file.exists()) {
-            FileUtils.forceDelete(file);
+            file.delete();
         }
 
         BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("logs统计.xlsx"));
