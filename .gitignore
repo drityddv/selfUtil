@@ -26,3 +26,12 @@
 /target/
 /logs统计.xlsx
 /report.txt
+/support/target/classes/application.properties
+/support/target/classes/webdriver/chromedriver_win32.zip
+/support/target/classes/config/webmagic/config.ini
+/support/target/classes/config/webmagic/fflogs.ini
+/support/target/classes/config/ff14/hong.txt
+/support/target/classes/log4j.properties
+/support/target/classes/config/ff14/scriptTemplate.txt
+/support/target/classes/META-INF/spring.factories
+/support/target/classes/config/ff14/绝龙诗.xlsx
