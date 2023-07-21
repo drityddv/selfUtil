@@ -1,7 +1,9 @@
 package com.xiaozhang.test.concurrent;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,15 +23,24 @@ public class ConcurrentTest1 {
 
     private long refreshAt = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         test2();
     }
 
-    private static void test2() {
-        int a = Integer.MAX_VALUE;
-        while (true) {
-            log.info(" a {}", a++);
-        }
+    private static void test2() throws ExecutionException, InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        Future<?> future = executorService.submit(() -> {
+            try {
+                Thread.sleep(1000*5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.info("job done");
+        });
+
+        Object o = future.get();
+        log.info("main done :{}",o);
+
     }
 
     private static void test1() {

@@ -43,7 +43,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
  * @author Kubby
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public final class JsonUtils {
+public final class JsonUtil {
 
     private static final TypeFactory TYPE_FACTORY = TypeFactory.defaultInstance();
     private static final long LONG_JS_MAX_VLAUE = 1L << 53;
@@ -199,7 +199,7 @@ public final class JsonUtils {
         MAPPER.registerModule(module);
     }
 
-    private JsonUtils() {
+    private JsonUtil() {
         throw new IllegalAccessError("该类不允许实例化");
     }
 
@@ -457,7 +457,7 @@ public final class JsonUtils {
                 return (T)value;
             }
             if (TypeUtils.isAssignable(type, Number.class) && value instanceof Number) {
-                return NumberUtils.valueOf(type, (Number)value);
+                return NumberUtil.valueOf(type, (Number)value);
             }
             if (!(value instanceof Collection && TypeUtils.isAssignable(type, Collection.class))
                 && !(value instanceof Map && TypeUtils.isAssignable(type, Map.class))) {

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.xiaozhang.algorithm.model.TreeSupport;
 import com.xiaozhang.algorithm.model.XTreeNode;
-import com.xiaozhang.util.JsonUtils;
+import com.xiaozhang.util.JsonUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,11 +23,11 @@ public class AlgorithmUtil {
 
         List<Object> result = new ArrayList<>();
         TreeSupport.bfsRecursion(headNode, result);
-        log.info("递归 {}", JsonUtils.object2String(result));
+        log.info("递归 {}", JsonUtil.object2String(result));
 
         List<Object> result2 = new ArrayList<>();
         TreeSupport.bfs(headNode, result2);
-        log.info("循环 {}", JsonUtils.object2String(result2));
+        log.info("循环 {}", JsonUtil.object2String(result2));
     }
 
 }

@@ -4,7 +4,7 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class NumberUtils {
+public class NumberUtil {
 
     @SuppressWarnings("unchecked")
     public static <T> T valueOf(Type resultType, Number value) {

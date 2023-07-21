@@ -9,7 +9,7 @@ import com.xiaozhang.spider.logs.model.PlayerDamageReport;
 import com.xiaozhang.spider.logs.webmagic.processor.DamagePageProcessor;
 import com.xiaozhang.spider.logs.webmagic.processor.GlobalPageProcessor;
 import com.xiaozhang.util.FileUtil;
-import com.xiaozhang.util.JsonUtils;
+import com.xiaozhang.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -75,12 +75,12 @@ public class LogsSpiderStart {
         if (StringUtils.isEmpty(json) || !useCache) {
             extractFightUrls();
             analyzeDamageReport();
-            json = JsonUtils.object2String(FIGHT_REPORTS.values());
+            json = JsonUtil.object2String(FIGHT_REPORTS.values());
             log.info("战斗报告数据:{}", json);
             FileUtils.writeLines(new File("report.txt"), Collections.singletonList(json));
         }
 
-        List<GlobalFightReport> memory = JsonUtils.string2Collection(json, ArrayList.class, GlobalFightReport.class);
+        List<GlobalFightReport> memory = JsonUtil.string2Collection(json, ArrayList.class, GlobalFightReport.class);
         writeExcel(memory);
 
     }

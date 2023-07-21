@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 import com.xiaozhang.common.CollectionUtils;
-import com.xiaozhang.util.RandomUtils;
+import com.xiaozhang.util.RandomUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -95,7 +95,7 @@ public class TreeSupport {
     }
 
     public static XTreeNode<Integer> makeTree(int nodeSize) {
-        List<Integer> randomUnRepeated = RandomUtils.randomUnRepeated(nodeSize);
+        List<Integer> randomUnRepeated = RandomUtil.randomUnRepeated(nodeSize);
         return makeTree(randomUnRepeated);
     }
 

@@ -2,7 +2,7 @@ package com.xiaozhang.spider.logs.model;
 
 import com.xiaozhang.spider.logs.LogsSpiderStart;
 import com.xiaozhang.spider.logs.constant.PhaseEnum;
-import com.xiaozhang.util.JsonUtils;
+import com.xiaozhang.util.JsonUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -86,7 +86,7 @@ public class GlobalFightReport {
     }
 
     public void log() {
-        log.info("{}", JsonUtils.object2String(this));
+        log.info("{}", JsonUtil.object2String(this));
     }
 
     public double getHpRemain() {
@@ -95,7 +95,7 @@ public class GlobalFightReport {
 
     public void addPhaseReport(int phaseId, PhaseFightReport phaseFightReport) {
         phaseFightReports.put(phaseId, phaseFightReport);
-        log.info("战斗序列:{} p{} 分析完毕,数据:{}", this.fightId, phaseId, JsonUtils.object2String(phaseFightReport));
+        log.info("战斗序列:{} p{} 分析完毕,数据:{}", this.fightId, phaseId, JsonUtil.object2String(phaseFightReport));
     }
 
     public String getRealTimeExcel() {

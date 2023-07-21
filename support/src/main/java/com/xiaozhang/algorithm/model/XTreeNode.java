@@ -3,7 +3,7 @@ package com.xiaozhang.algorithm.model;
 import java.util.Optional;
 
 import com.xiaozhang.algorithm.leetcode.model.TreeNode;
-import com.xiaozhang.util.JsonUtils;
+import com.xiaozhang.util.JsonUtil;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -76,7 +76,7 @@ public class XTreeNode<T> {
     }
 
     public String toJson() {
-        String jsonString = JsonUtils.object2String(this);
+        String jsonString = JsonUtil.object2String(this);
         log.info("{}", jsonString);
         return jsonString;
     }

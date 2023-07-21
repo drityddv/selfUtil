@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 
-import com.xiaozhang.util.JsonUtils;
+import com.xiaozhang.util.JsonUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,7 +70,7 @@ public class MacUtils {
             Matcher matcher = compile.matcher(file.getName());
             if (matcher.find()) {
                 String result = matcher.group(0);
-                log.info("{}", JsonUtils.object2String(result));
+                log.info("{}", JsonUtil.object2String(result));
                 String newName = srcFilePath + "/Slam Dunk - " + result + ".mp4";
                 file.renameTo(new File(newName));
             }

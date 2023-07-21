@@ -3,7 +3,7 @@ package com.xiaozhang.spider.logs.webmagic.processor;
 import com.xiaozhang.spider.logs.LogsSpiderStart;
 import com.xiaozhang.spider.logs.constant.LogsXpathEnum;
 import com.xiaozhang.spider.logs.model.GlobalFightReport;
-import com.xiaozhang.util.JsonUtils;
+import com.xiaozhang.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -40,7 +40,7 @@ public class GlobalPageProcessor implements PageProcessor {
         }
 
         LogsSpiderStart.FIGHT_REPORTS.values().forEach(GlobalFightReport::log);
-        log.info("分析logs总页面完毕... :[{}]", JsonUtils.object2String(LogsSpiderStart.FIGHT_REPORTS));
+        log.info("分析logs总页面完毕... :[{}]", JsonUtil.object2String(LogsSpiderStart.FIGHT_REPORTS));
     }
 
     @Override
