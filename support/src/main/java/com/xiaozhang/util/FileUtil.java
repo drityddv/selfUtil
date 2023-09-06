@@ -1,15 +1,13 @@
 package com.xiaozhang.util;
 
+import java.io.*;
+import java.util.*;
+
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.*;
 import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author : xiaozhang
@@ -36,6 +34,38 @@ public class FileUtil {
             result.put(key, value);
         }
 
+        return result;
+    }
+
+    /**
+     * @see FileFilterUtils#trueFileFilter()
+     */
+    public static List<File> scanFiles(File srcPath, String[] extensions, List<IOFileFilter> ioFileFilter) {
+        if (srcPath == null || !srcPath.isDirectory()) {
+            return Collections.emptyList();
+        }
+
+        List<File> result = new ArrayList<>();
+
+        Iterator<File> iterateFiles = FileUtils.iterateFilesAndDirs(srcPath, TrueFileFilter.TRUE, TrueFileFilter.TRUE);
+        iterateFiles.forEachRemaining(file -> {
+            if (file.isDirectory()) {
+                return;
+            }
+            
+            if(!new SuffixFileFilter(extensions).accept(file)){
+                return;
+            }
+            
+            if (ioFileFilter != null) {
+                for (IOFileFilter fileFilter : ioFileFilter) {
+                    if (!fileFilter.accept(file)) {
+                        return;
+                    }
+                }
+            }
+            result.add(file);
+        });
         return result;
     }
 

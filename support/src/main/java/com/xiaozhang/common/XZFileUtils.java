@@ -1,14 +1,9 @@
 package com.xiaozhang.common;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.*;
 
 import org.apache.commons.io.FileUtils;
 
@@ -86,5 +81,26 @@ public class XZFileUtils {
             }
         }
         return fileStream.collect(Collectors.toList());
+    }
+
+    public static void moveFiles() {
+
+    }
+
+    public static void readFile(String file) throws IOException {
+        List<String> readLines = FileUtils.readLines(new File(file));
+        List<String> create_table_sql_lines =
+            readLines.stream().filter(s -> s.contains("CREATE TABLE")).collect(Collectors.toList());
+        for (String tableSqlLine : create_table_sql_lines) {
+            String tableName =
+                tableSqlLine.toLowerCase().replaceAll("create table", "").replaceAll("\\(", "").replaceAll(" ", "");
+            log.info("drop table if exist {} ", tableName);
+            String line = "drop table if exists " + tableName + ";";
+            FileUtils.writeLines(new File("result.txt"), Collections.singleton(line), true);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        readFile("/Users/xiaozhang/Documents/草稿纸3.txt");
     }
 }

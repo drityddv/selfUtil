@@ -1,14 +1,13 @@
 package com.xiaozhang.util;
 
-import lombok.extern.slf4j.Slf4j;
+import java.sql.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.apache.commons.lang3.mutable.MutableInt;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.LinkedHashSet;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : xiaozhang
@@ -17,9 +16,32 @@ import java.util.LinkedHashSet;
 @Slf4j
 public class SqlUtils {
 
+    private static final AtomicInteger record = new AtomicInteger(0);
+
+    private static final Set<String> skipTables = new HashSet<>();
+
+    static {
+        // skipTables.add("battle_server_info");
+//        skipTables.add("server_info");
+//        skipTables.add("battle_server_world_return");
+    }
+
     public static void main(String[] args) {
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+         executorService.submit(() -> clear(668));
+         executorService.submit(() -> clear(670));
+
+        executorService.submit(() -> clear(669));
+
+        executorService.submit(() -> clear(671));
+
+    }
+
+    public static void clear(int serverId) {
+        record.addAndGet(1);
         // 数据库连接参数
-        String url = "jdbc:mysql://10.2.4.42:3306/lf668?";
+        String url = null;
+        url = "jdbc:mysql://10.1.2.126:3306/lf" + serverId;
         String username = "root";
         String password = "admin123";
 
@@ -50,11 +72,15 @@ public class SqlUtils {
             resultSet.close();
             MutableInt finishCount = new MutableInt();
             for (String table : tables) {
+                if (skipTables.contains(table)) {
+                    continue;
+                }
                 try {
                     String sql = "truncate table " + table;
                     statement.execute(sql);
                     finishCount.add(1);
-                    log.info("进度{}% {} ", (int) (finishCount.getValue() * 1.0d / tables.size() * 100), table);
+                    log.info("serverId :{} 进度{}% {} ", serverId,
+                        (int)(finishCount.getValue() * 1.0d / tables.size() * 100), table);
                 } catch (Exception e) {
                     log.error("error on {}", table);
                 }
@@ -63,9 +89,7 @@ public class SqlUtils {
             // 关闭结果集和声明
 
             statement.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
             // 关闭数据库连接
@@ -76,7 +100,12 @@ public class SqlUtils {
                     e.printStackTrace();
                 }
             }
+            record.decrementAndGet();
+            if (record.get() == 0) {
+                System.exit(1);
+            }
         }
+
     }
 
 }
