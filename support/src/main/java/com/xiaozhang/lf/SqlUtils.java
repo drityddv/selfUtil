@@ -1,4 +1,4 @@
-package com.xiaozhang.util;
+package com.xiaozhang.lf;
 
 import java.sql.*;
 import java.util.*;
@@ -21,18 +21,17 @@ public class SqlUtils {
     private static final Set<String> skipTables = new HashSet<>();
 
     static {
-        // skipTables.add("battle_server_info");
+//        skipTables.add("battle_server_info");
 //        skipTables.add("server_info");
 //        skipTables.add("battle_server_world_return");
     }
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-         executorService.submit(() -> clear(668));
-         executorService.submit(() -> clear(670));
+        // executorService.submit(() -> clear(668));
+        // executorService.submit(() -> clear(670));
 
-        executorService.submit(() -> clear(669));
-
+//        executorService.submit(() -> clear(669));
         executorService.submit(() -> clear(671));
 
     }
@@ -41,7 +40,7 @@ public class SqlUtils {
         record.addAndGet(1);
         // 数据库连接参数
         String url = null;
-        url = "jdbc:mysql://10.1.2.126:3306/lf" + serverId;
+        url = "jdbc:mysql://10.1.2.23:3306/lf" + serverId;
         String username = "root";
         String password = "admin123";
 
@@ -79,8 +78,8 @@ public class SqlUtils {
                     String sql = "truncate table " + table;
                     statement.execute(sql);
                     finishCount.add(1);
-                    log.info("serverId :{} 进度{}% {} ", serverId,
-                        (int)(finishCount.getValue() * 1.0d / tables.size() * 100), table);
+                    log.info("serverId :{} 进度{}% {} ", url, (int)(finishCount.getValue() * 1.0d / tables.size() * 100),
+                        table);
                 } catch (Exception e) {
                     log.error("error on {}", table);
                 }
