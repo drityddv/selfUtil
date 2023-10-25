@@ -5,11 +5,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.math3.util.Pair;
 
 import com.xiaozhang.util.FileUtil;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.util.Pair;
 
 /**
  * @author : xiaozhang
@@ -19,9 +19,10 @@ import org.apache.commons.math3.util.Pair;
 @Slf4j
 public class LfUtil {
 
+    public static final Map<Integer, Integer> workSpace2ServerId = new HashMap<>();
+    public static final Map<Integer, Integer> serverId2WorkSpaceId = new HashMap<>();
     // 实际代码位置
     public static final Map<Integer, String> workSpaceCodePath = new HashMap<>();
-    public static final Map<Integer, Integer> workSpace2ServerId = new HashMap<>();
     // 生成代码位置
     private static final Map<Integer, String> workSpaceGenCodePath = new HashMap<>();
     private static final String[] FILE_ENDS;
@@ -42,6 +43,11 @@ public class LfUtil {
         workSpace2ServerId.put(2, 669);
         workSpace2ServerId.put(3, 670);
         workSpace2ServerId.put(4, 671);
+
+        serverId2WorkSpaceId.put(668, 1);
+        serverId2WorkSpaceId.put(669, 2);
+        serverId2WorkSpaceId.put(670, 3);
+        serverId2WorkSpaceId.put(671, 4);
     }
 
     public static void copyLfMappers(int workSpaceId) {
@@ -111,12 +117,11 @@ public class LfUtil {
 
     }
 
-    public static Pair<String,String> getWorkSpaceResourcePath(int workSpaceId) {
-        String workSpacePath = workSpaceCodePath.get(workSpaceId);
-        Integer serverId = workSpace2ServerId.get(workSpaceId);
+    public static Pair<String, String> getWorkSpaceResourcePath(int serverId) {
+        String workSpacePath = workSpaceCodePath.get(serverId2WorkSpaceId.get(serverId));
         String finalResourcePath =
             workSpacePath.replaceAll("src/main/", "") + "extra/extensions/" + "LF" + serverId + "/" + "resource/";
-        return Pair.create(finalResourcePath,finalResourcePath.replace("resource","worldCity"));
+        return Pair.create(finalResourcePath, finalResourcePath.replace("resource", "worldCity"));
     }
 
 }

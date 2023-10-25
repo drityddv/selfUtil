@@ -1,13 +1,14 @@
-package com.xiaozhang.lf;
+package com.xiaozhang.lf.config;
 
-import java.io.*;
+import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.util.Pair;
+import org.junit.Test;
 
+import com.xiaozhang.lf.LfUtil;
 import com.xiaozhang.util.JsonUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,28 +21,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CopyConfig extends LfUtil {
 
-     private static String branceName = "联盟BP配置";
-//    private static String branceName = "";
-    
-    public static Set<String> skipFiles  = new HashSet<>();
-    
-    static {
-        skipFiles.add("activity_panel.xml");
+    @Test
+    public void copy670() throws Exception {
+        LfCopyConfigContext copyConfigContext = LfCopyConfigContext.of(670, null, null);
+        copyConfigs(copyConfigContext);
     }
 
-    private static String svnPath = "/Users/xiaozhang/workspace/im30/lf/cehua/LastFortress/resource_t";
-
-    public static void main(String[] args) throws IOException {
-//        copyConfigs(1);
-//        copyConfigs(2);
-         copyConfigs(3);
-//        copyConfigs(4);
+    @Test
+    public void copySkinShop() throws Exception {
+        LfCopyConfigContext copyConfigContext = LfCopyConfigContext.of(671, "IP_Center2", null);
+        copyConfigs(copyConfigContext);
     }
 
-    private static void copyConfigs(int workSpaceId) throws IOException {
-        if (!StringUtils.isEmpty(branceName)) {
-            svnPath = svnPath + "/" + branceName + "/";
-        }
+    public void copyConfigs(LfCopyConfigContext copyConfigContext) throws Exception {
+        String svnPath = copyConfigContext.calcSvnPath();
         File configFolder = new File(svnPath);
         if (!configFolder.exists() || !configFolder.isDirectory()) {
             log.error("configFolder path error :{}", svnPath);
@@ -54,10 +47,13 @@ public class CopyConfig extends LfUtil {
         Collections.sort(xmlFiles);
         log.info("{}", xmlFiles.stream().map(File::getName).collect(Collectors.toList()));
 
-        Pair<String, String> resourcePath = LfUtil.getWorkSpaceResourcePath(workSpaceId);
+        int serverId = copyConfigContext.getServerId();
+        Set<String> skipFiles = copyConfigContext.getSkipFiles();
+        Pair<String, String> resourcePath = LfUtil.getWorkSpaceResourcePath(serverId);
         log.info("即将copy配置到目录:{}", JsonUtil.object2String(resourcePath));
         for (File xmlFile : xmlFiles) {
-            if(skipFiles.contains(xmlFile.getName())) {
+            if (skipFiles.contains(xmlFile.getName())) {
+                log.info("跳过文件:{}", xmlFile.getName());
                 continue;
             }
             // 删除xmlFile文件
@@ -66,7 +62,7 @@ public class CopyConfig extends LfUtil {
             FileUtils.copyFile(xmlFile, desFile);
             // 删除desFile文件
 
-            log.info("拷贝完成 :{}", desFile.getAbsolutePath());
+            log.info("拷贝完成 :{}", desFile.getName());
         }
 
     }

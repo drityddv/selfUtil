@@ -7,7 +7,7 @@ package com.xiaozhang.lf;
 
 public class CopyBeanMapper extends LfUtil {
 
-    private static int workSpaceId = 3;
+    private static int workSpaceId = 2;
 
     public static void main(String[] args) {
         if (args != null && args.length > 0) {
