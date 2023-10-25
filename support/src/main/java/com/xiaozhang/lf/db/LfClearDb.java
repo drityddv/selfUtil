@@ -1,4 +1,4 @@
-package com.xiaozhang.lf.db.clear;
+package com.xiaozhang.lf.db;
 
 import java.sql.*;
 import java.util.*;
@@ -8,7 +8,6 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import org.junit.Test;
 
 import com.xiaozhang.common.CollectionUtils;
-import com.xiaozhang.lf.db.clear.MySqlClearContext;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,18 +16,10 @@ import lombok.extern.slf4j.Slf4j;
  * @since : 2023/7/27 15:38
  */
 @Slf4j
-public class LfClearDbUtil {
+public class LfClearDb {
 
     private ExecutorService executorService = Executors.newFixedThreadPool(12);
     private CountDownLatch countDownLatch;
-
-    static {
-        // skipTables.add("server_info");
-        //
-        // requiredTables.add("activity_item");
-        // requiredTables.add("alliance_bp");
-        // requiredTables.add("user_alliance_bp");
-    }
 
     @Test
     // 联盟bp
@@ -37,37 +28,37 @@ public class LfClearDbUtil {
         List<String> skipTableList = Arrays.asList("server_info");
         List<String> requiredTableList = Arrays.asList("activity_item", "alliance_bp", "user_alliance_bp");
 
-        List<MySqlClearContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
     }
 
     @Test
     // 联盟bp
     public void clearMiniGameCenter() throws Exception {
-        List<Integer> serverIds = Arrays.asList(669);
+        List<Integer> serverIds = Arrays.asList(669, 670);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = Arrays.asList("activity_item", "user_minigame_center","user_zombie_attack","user_zombie_attack_fight");
+        List<String> requiredTableList = Arrays.asList("activity_item", "user_minigame_center");
 
-        List<MySqlClearContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
     }
 
-    private List<MySqlClearContext> generateClearContext(List<Integer> serverIdList, List<String> skipTableList,
-        List<String> requiredTableList) {
-        List<MySqlClearContext> result = new ArrayList<>();
+    private List<LfClearDbContext> generateClearContext(List<Integer> serverIdList, List<String> skipTableList,
+                                                        List<String> requiredTableList) {
+        List<LfClearDbContext> result = new ArrayList<>();
         for (Integer serverId : serverIdList) {
-            MySqlClearContext clearContext = MySqlClearContext.of(serverId, skipTableList, requiredTableList);
+            LfClearDbContext clearContext = LfClearDbContext.of(serverId, skipTableList, requiredTableList);
             result.add(clearContext);
         }
         return result;
     }
 
-    private void submitClearTask(List<MySqlClearContext> clearContexts) throws InterruptedException {
+    private void submitClearTask(List<LfClearDbContext> clearContexts) throws InterruptedException {
         if (CollectionUtils.isEmpty(clearContexts)) {
             return;
         }
         countDownLatch = new CountDownLatch(clearContexts.size());
-        for (MySqlClearContext clearContext : clearContexts) {
+        for (LfClearDbContext clearContext : clearContexts) {
             executorService.submit(() -> clear(clearContext));
         }
         log.info("等待任务执行完成...");
@@ -75,7 +66,7 @@ public class LfClearDbUtil {
         log.info("任务执行完成...");
     }
 
-    public void clear(MySqlClearContext clearContext) {
+    public void clear(LfClearDbContext clearContext) {
         // JDBC连接对象
         Connection conn = null;
         try {

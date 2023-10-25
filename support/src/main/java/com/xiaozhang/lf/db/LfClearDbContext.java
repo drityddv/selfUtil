@@ -1,4 +1,4 @@
-package com.xiaozhang.lf.db.clear;
+package com.xiaozhang.lf.db;
 
 import java.util.*;
 
@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Getter
-public class MySqlClearContext {
+public class LfClearDbContext {
     // mysql相关配置
     private String mysqlHost = "jdbc:mysql://10.1.2.23:3306/lf";
     private String userName = "root";
@@ -27,9 +27,9 @@ public class MySqlClearContext {
     // 指定清理的表 其他表不清
     private Set<String> requiredTableList = new HashSet<>();
 
-    public static MySqlClearContext of(int serverId, Collection<String> skipTableList,
-        Collection<String> requiredTableList) {
-        MySqlClearContext clearContext = new MySqlClearContext();
+    public static LfClearDbContext of(int serverId, Collection<String> skipTableList,
+                                      Collection<String> requiredTableList) {
+        LfClearDbContext clearContext = new LfClearDbContext();
         clearContext.serverId = serverId;
         if (CollectionUtils.isNotEmpty(skipTableList)) {
             clearContext.skipTableList.addAll(skipTableList);
