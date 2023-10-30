@@ -22,8 +22,28 @@ import lombok.extern.slf4j.Slf4j;
 public class LfCopyConfig extends LfUtil {
 
     @Test
-    public void copy670() throws Exception {
-        LfCopyConfigContext copyConfigContext = LfCopyConfigContext.of(670, null, null);
+    public void copyDevelop() throws Exception {
+
+        List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
+
+        copyConfigContexts.add(LfCopyConfigContext.of(668, null, null));
+
+        copyConfigs(copyConfigContexts);
+    }
+
+    @Test
+    public void copyIp2() throws Exception {
+        List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
+
+        copyConfigContexts.add(LfCopyConfigContext.of(668, "五日任务测试配置", null));
+//        copyConfigContexts.add(LfCopyConfigContext.of(668, "IP_Center2", null));
+
+        copyConfigs(copyConfigContexts);
+    }
+
+    @Test
+    public void copyMonthSign() throws Exception {
+        LfCopyConfigContext copyConfigContext = LfCopyConfigContext.of(668, "IP_Center2", null);
         copyConfigs(Collections.singletonList(copyConfigContext));
     }
 
@@ -35,11 +55,11 @@ public class LfCopyConfig extends LfUtil {
 
     @Test
     public void copyMiniGameCenter() throws Exception {
-        List<String> skipXml = Arrays.asList("activity_panel.xml");
-        LfCopyConfigContext copyConfigContext1 = LfCopyConfigContext.of(669, "小游戏大厅配置", skipXml);
-        LfCopyConfigContext copyConfigContext2 = LfCopyConfigContext.of(670, "小游戏大厅配置", skipXml);
+        // List<String> skipXml = Arrays.asList("activity_panel.xml");
+        LfCopyConfigContext copyConfigContext1 = LfCopyConfigContext.of(669, "小游戏大厅配置", null);
+        // LfCopyConfigContext copyConfigContext2 = LfCopyConfigContext.of(670, "小游戏大厅配置", skipXml);
 
-        List<LfCopyConfigContext> copyConfigContexts = Arrays.asList(copyConfigContext1, copyConfigContext2);
+        List<LfCopyConfigContext> copyConfigContexts = Arrays.asList(copyConfigContext1);
         copyConfigs(copyConfigContexts);
     }
 

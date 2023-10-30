@@ -24,7 +24,7 @@ public class LfClearDb {
     @Test
     // 联盟bp
     public void clearAllianceBp() throws Exception {
-        List<Integer> serverIds = Arrays.asList(668, 670);
+        List<Integer> serverIds = Arrays.asList(671);
         List<String> skipTableList = Arrays.asList("server_info");
         List<String> requiredTableList = Arrays.asList("activity_item", "alliance_bp", "user_alliance_bp");
 
@@ -33,9 +33,32 @@ public class LfClearDb {
     }
 
     @Test
-    // 联盟bp
+    // 五日任务
+    public void clearFiveDay() throws Exception {
+        List<Integer> serverIds = Arrays.asList(668);
+        List<String> skipTableList = Arrays.asList("server_info");
+        List<String> requiredTableList =
+            Arrays.asList("activity_item", "user_day_task_act", "user_day_task_act_record");
+
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        submitClearTask(clearContextList);
+    }
+
+    @Test
+    // 31天签到
+    public void clearMonthSign() throws Exception {
+        List<Integer> serverIds = Arrays.asList(668);
+        List<String> skipTableList = Arrays.asList("server_info");
+        List<String> requiredTableList = Arrays.asList("activity_item", "user_act_sign");
+
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        submitClearTask(clearContextList);
+    }
+
+    @Test
+    // 小游戏大厅
     public void clearMiniGameCenter() throws Exception {
-        List<Integer> serverIds = Arrays.asList(669, 670);
+        List<Integer> serverIds = Arrays.asList(669);
         List<String> skipTableList = Arrays.asList("server_info");
         List<String> requiredTableList = Arrays.asList("activity_item", "user_minigame_center");
 
@@ -44,7 +67,7 @@ public class LfClearDb {
     }
 
     private List<LfClearDbContext> generateClearContext(List<Integer> serverIdList, List<String> skipTableList,
-                                                        List<String> requiredTableList) {
+        List<String> requiredTableList) {
         List<LfClearDbContext> result = new ArrayList<>();
         for (Integer serverId : serverIdList) {
             LfClearDbContext clearContext = LfClearDbContext.of(serverId, skipTableList, requiredTableList);
