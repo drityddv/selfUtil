@@ -50,7 +50,8 @@ public class LfUtil {
         serverId2WorkSpaceId.put(671, 4);
     }
 
-    public static void copyLfMappers(int workSpaceId) {
+    public static void copyLfMappers(int serverId) {
+        int workSpaceId = serverId2WorkSpaceId.get(serverId);
         String codePath = workSpaceCodePath.get(workSpaceId);
         File genCodePath = new File(workSpaceGenCodePath.get(workSpaceId));
         log.info("工作空间 id:[lf{}] 路径:[{}]", workSpaceId, genCodePath.getAbsolutePath());

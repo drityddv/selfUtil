@@ -16,7 +16,7 @@ import lombok.Getter;
 @Getter
 public class LfCopyConfigContext {
     // svn地址
-    private static final String svnPath = "/Users/xiaozhang/workspace/im30/lf/cehua/LastFortress/resource_t/";
+    private static final String svnPath = "/Users/xiaozhang/workspace/im30/lf2/cehua/resource_t/";
 
     // 服务器id
     private int serverId;
@@ -24,8 +24,11 @@ public class LfCopyConfigContext {
     private String branchName = "";
     // 不需要copy的配置
     private Set<String> skipFiles = new HashSet<>();
+    // 需要特定copy的配置
+    private Set<String> requiredFiles = new HashSet<>();
 
-    public static LfCopyConfigContext of(int serverId, String branchName, Collection<String> skipFiles) {
+    public static LfCopyConfigContext of(int serverId, String branchName, Collection<String> skipFiles,
+        Collection<String> requiredFiles) {
         LfCopyConfigContext context = new LfCopyConfigContext();
         context.serverId = serverId;
         if (StringUtils.isNoneBlank(branchName)) {
@@ -33,6 +36,9 @@ public class LfCopyConfigContext {
         }
         if (CollectionUtils.isNotEmpty(skipFiles)) {
             context.skipFiles.addAll(skipFiles);
+        }
+        if (CollectionUtils.isNotEmpty(requiredFiles)) {
+            context.requiredFiles.addAll(requiredFiles);
         }
         return context;
     }
