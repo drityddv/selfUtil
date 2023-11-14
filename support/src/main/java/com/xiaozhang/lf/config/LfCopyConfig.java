@@ -55,7 +55,7 @@ public class LfCopyConfig extends LfUtil {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
 
         copyConfigContexts.add(LfCopyConfigContext.of(670, "S1change", null,
-            Arrays.asList("shining_score.xml", "rank_reward.xml","reward.xml")));
+            Arrays.asList("activity_panel.xml","shining_score.xml", "rank_reward.xml","reward.xml","function_on.xml")));
 
         copyConfigs(copyConfigContexts);
     }
