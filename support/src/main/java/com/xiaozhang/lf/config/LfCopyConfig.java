@@ -24,10 +24,10 @@ public class LfCopyConfig extends LfUtil {
     @Test
     public void copyDevelop() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        //        copyConfigContexts.add(LfCopyConfigContext.of(668, null, null, null));
-        
-        copyConfigContexts.add(LfCopyConfigContext.of(668, null, Arrays.asList("activity_panel.xml"), null));
-        copyConfigContexts.add(LfCopyConfigContext.of(670, null, Arrays.asList("activity_panel.xml"), null));
+        // copyConfigContexts.add(LfCopyConfigContext.of(668, null, null, null));
+
+        copyConfigContexts.add(LfCopyConfigContext.of(668, null,null, null));
+//        copyConfigContexts.add(LfCopyConfigContext.of(670, null, Arrays.asList("activity_panel.xml"), null));
         copyConfigs(copyConfigContexts);
     }
 
@@ -51,11 +51,17 @@ public class LfCopyConfig extends LfUtil {
     }
 
     @Test
+    public void copyScoreRank() throws Exception {
+        LfCopyConfigContext copyConfigContext = LfCopyConfigContext.of(669, "击杀排行活动", Arrays.asList("activity_panel.xml"), null);
+        copyConfigs(Collections.singletonList(copyConfigContext));
+    }
+
+    @Test
     public void copyShiningScore() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
 
-        copyConfigContexts.add(LfCopyConfigContext.of(670, "S1change", null,
-            Arrays.asList("activity_panel.xml","shining_score.xml", "rank_reward.xml","reward.xml","function_on.xml")));
+        copyConfigContexts.add(LfCopyConfigContext.of(670, "S1change", null, Arrays.asList("activity_panel.xml",
+            "shining_score.xml", "rank_reward.xml", "reward.xml", "function_on.xml")));
 
         copyConfigs(copyConfigContexts);
     }

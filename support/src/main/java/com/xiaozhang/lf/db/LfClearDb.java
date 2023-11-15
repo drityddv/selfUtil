@@ -22,6 +22,17 @@ public class LfClearDb {
     private CountDownLatch countDownLatch;
 
     @Test
+    // 击杀排行榜
+    public void clearScoreRank() throws Exception {
+        List<Integer> serverIds = Arrays.asList(669);
+        List<String> skipTableList = Arrays.asList("server_info");
+        List<String> requiredTableList = Arrays.asList("activity_item", "user_score_rank");
+
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        submitClearTask(clearContextList);
+    }
+    
+    @Test
     // 联盟bp
     public void clearAllianceBp() throws Exception {
         List<Integer> serverIds = Arrays.asList(668,669);
@@ -49,7 +60,7 @@ public class LfClearDb {
         List<Integer> serverIds = Arrays.asList(668);
         List<String> skipTableList = Arrays.asList("server_info");
         List<String> requiredTableList =
-            Arrays.asList("activity_item", "user_day_task_act", "user_day_task_act_record");
+            Arrays.asList("activity_item","user_task", "user_day_task_act", "user_day_task_act_record","user_day_task_stage_reward");
 
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
