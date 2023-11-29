@@ -45,4 +45,28 @@ public class LfClearDbContext {
     public String getUrl() {
         return this.mysqlHost + serverId;
     }
+
+    public void setMysqlHost(String mysqlHost) {
+        this.mysqlHost = mysqlHost;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setServerId(int serverId) {
+        this.serverId = serverId;
+    }
+
+    public void setSkipTableList(Set<String> skipTableList) {
+        this.skipTableList = skipTableList;
+    }
+
+    public void setRequiredTableList(Set<String> requiredTableList) {
+        this.requiredTableList = requiredTableList;
+    }
 }

@@ -21,13 +21,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LfCopyConfig extends LfUtil {
 
+    private static List<String> mergeServerXml = Arrays.asList("cross_server_group.xml");
+
     @Test
     public void copyDevelop() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        // copyConfigContexts.add(LfCopyConfigContext.of(668, null, null, null));
 
-        copyConfigContexts.add(LfCopyConfigContext.of(668, null,null, null));
-//        copyConfigContexts.add(LfCopyConfigContext.of(670, null, Arrays.asList("activity_panel.xml"), null));
+         copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, Arrays.asList("intelligence.xml")));
+         copyConfigContexts.add(LfCopyConfigContext.of(671, null, mergeServerXml, Arrays.asList("intelligence.xml")));
+        
+//        copyConfigContexts.add(LfCopyConfigContext.of(669, null, mergeServerXml, null));
+        
+        // copyConfigContexts.add(LfCopyConfigContext.of(670, null, Arrays.asList("activity_panel.xml"), null));
         copyConfigs(copyConfigContexts);
     }
 
@@ -52,7 +57,8 @@ public class LfCopyConfig extends LfUtil {
 
     @Test
     public void copyScoreRank() throws Exception {
-        LfCopyConfigContext copyConfigContext = LfCopyConfigContext.of(669, "击杀排行活动", Arrays.asList("activity_panel.xml"), null);
+        LfCopyConfigContext copyConfigContext =
+            LfCopyConfigContext.of(669, "击杀排行活动", Arrays.asList("activity_panel.xml"), null);
         copyConfigs(Collections.singletonList(copyConfigContext));
     }
 

@@ -31,11 +31,11 @@ public class LfClearDb {
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
     }
-    
+
     @Test
     // 联盟bp
     public void clearAllianceBp() throws Exception {
-        List<Integer> serverIds = Arrays.asList(668,669);
+        List<Integer> serverIds = Arrays.asList(669);
         List<String> skipTableList = Arrays.asList("server_info");
         List<String> requiredTableList = Arrays.asList("activity_item", "alliance_bp", "user_alliance_bp");
 
@@ -46,9 +46,9 @@ public class LfClearDb {
     @Test
     // 闪耀之光
     public void clearShiningScore() throws Exception {
-        List<Integer> serverIds = Arrays.asList(670);
+        List<Integer> serverIds = Arrays.asList(670, 671);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = Arrays.asList("activity_item", "user_shining_score","alliance_shining_score");
+        List<String> requiredTableList = Arrays.asList("activity_item", "user_shining_score", "alliance_shining_score");
 
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
@@ -59,32 +59,42 @@ public class LfClearDb {
     public void clearFiveDay() throws Exception {
         List<Integer> serverIds = Arrays.asList(668);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList =
-            Arrays.asList("activity_item","user_task", "user_day_task_act", "user_day_task_act_record","user_day_task_stage_reward");
+        List<String> requiredTableList = Arrays.asList("activity_item", "user_task", "user_day_task_act",
+            "user_day_task_act_record", "user_day_task_stage_reward");
 
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
     }
 
     @Test
-    // 31天签到
-    public void clearMonthSign() throws Exception {
-        List<Integer> serverIds = Arrays.asList(668);
+    public void clearAll() throws Exception {
+        List<Integer> serverIds = Arrays.asList(668, 671);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = Arrays.asList("activity_item", "user_act_sign");
-
-        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, null);
         submitClearTask(clearContextList);
     }
 
     @Test
     // 小游戏大厅
     public void clearMiniGameCenter() throws Exception {
-        List<Integer> serverIds = Arrays.asList(669,670);
+        List<Integer> serverIds = Arrays.asList(669);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = Arrays.asList("activity_item", "user_minigame_center","user_flop_card","gold_miner_act_record");
+        List<String> requiredTableList =
+            Arrays.asList("activity_item", "user_minigame_center", "user_flop_card", "gold_miner_act_record");
 
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        submitClearTask(clearContextList);
+    }
+
+    @Test
+    public void clear903_904() throws Exception {
+        List<Integer> serverIds = Arrays.asList(903, 904);
+        List<String> skipTableList = Arrays.asList("server_info");
+
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, null);
+        for (LfClearDbContext clearDbContext : clearContextList) {
+            clearDbContext.setMysqlHost("jdbc:mysql://10.2.4.42:3306/lf");
+        }
         submitClearTask(clearContextList);
     }
 
