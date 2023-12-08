@@ -68,7 +68,7 @@ public class LfClearDb {
 
     @Test
     public void clearAll() throws Exception {
-        List<Integer> serverIds = Arrays.asList(668, 671);
+        List<Integer> serverIds = Arrays.asList(671);
         List<String> skipTableList = Arrays.asList("server_info");
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, null);
         submitClearTask(clearContextList);

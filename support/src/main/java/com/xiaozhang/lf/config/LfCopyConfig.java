@@ -26,20 +26,16 @@ public class LfCopyConfig extends LfUtil {
     @Test
     public void copyDevelop() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-
-         copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, Arrays.asList("intelligence.xml")));
-         copyConfigContexts.add(LfCopyConfigContext.of(671, null, mergeServerXml, Arrays.asList("intelligence.xml")));
-        
-//        copyConfigContexts.add(LfCopyConfigContext.of(669, null, mergeServerXml, null));
-        
-        // copyConfigContexts.add(LfCopyConfigContext.of(670, null, Arrays.asList("activity_panel.xml"), null));
+        copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, Arrays.asList("intelligence.xml")));
+//        copyConfigContexts.add(LfCopyConfigContext.of(671, null, mergeServerXml, Arrays.asList("intelligence.xml")));
         copyConfigs(copyConfigContexts);
     }
 
     @Test
-    public void copyIp2() throws Exception {
+    public void copyFireworks() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        copyConfigContexts.add(LfCopyConfigContext.of(668, "P21607", null, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(669, "NewYear", mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(671, "NewYear", mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 
