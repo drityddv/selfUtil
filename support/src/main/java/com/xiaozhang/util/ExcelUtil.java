@@ -18,9 +18,9 @@ public class ExcelUtil {
 
     @Test
     public void exportDD() throws Exception {
-        String excelUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023_06-07 资料/张杰(小张).xlsx";
-        String imageUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023_06-07 资料/考勤截图";
-        String carBillUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023_06-07 资料/出租车发票拍照";
+        String excelUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023.08-2023.11/" + "张杰(小张).xlsx";
+        String imageUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023.08-2023.11/考勤截图";
+        String carBillUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023.08-2023.11/出租车发票拍照";
         createExcelWithImage(excelUrl, imageUrl, carBillUrl);
     }
 
@@ -44,8 +44,6 @@ public class ExcelUtil {
         return imageList;
     }
 
- 
-
     // 考勤截图
     private void handleWorkSignPic(List<File> imageList, XSSFWorkbook workbook) throws IOException {
         XSSFSheet sheet = workbook.createSheet("考勤截图");
@@ -68,7 +66,7 @@ public class ExcelUtil {
         for (File file : imageList) {
             // 插入图片
             patriarch.createPicture(clientAnchorJump.jump(),
-                    workbook.addPicture(IOUtils.toByteArray(new FileInputStream(file)), XSSFWorkbook.PICTURE_TYPE_JPEG));
+                workbook.addPicture(IOUtils.toByteArray(new FileInputStream(file)), XSSFWorkbook.PICTURE_TYPE_JPEG));
         }
     }
 

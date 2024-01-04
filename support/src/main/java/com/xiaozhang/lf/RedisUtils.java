@@ -22,7 +22,10 @@ public class RedisUtils {
     }
     
     public static void main(String[] args) {
-//        clearAllianceBpRank();
+        double score = 60797.273265999655;
+        int intScore = new Double(score).intValue();
+        int scoreFix = (int) (intScore *1.1);
+        log.info("scoreFix:{}", scoreFix);
     }
 
     private static void clearAllianceBpRank() {

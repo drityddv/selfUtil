@@ -21,6 +21,39 @@ public class LfClearDb {
     private ExecutorService executorService = Executors.newFixedThreadPool(12);
     private CountDownLatch countDownLatch;
 
+    // 小游戏大厅
+    @Test
+    public void clearMiniGameCenter() throws Exception {
+        List<Integer> serverIds = Arrays.asList(669,670);
+        List<String> skipTableList = Arrays.asList("server_info");
+        List<String> requiredTableList = new ArrayList<>(
+            Arrays.asList("activity_item", "user_minigame_center"));
+
+        // 翻牌
+        {
+            requiredTableList.add("user_flop_card");
+        }
+
+        // 纳特寻宝
+        {
+            requiredTableList.add("gold_miner_act_record");
+        }
+
+        // 羊了个羊
+        {
+            requiredTableList.add("user_block_info");
+            requiredTableList.add("user_stage_info");
+        }
+
+        // 守护堡垒
+        {
+            requiredTableList.add("user_merge_cannon");
+        }
+
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        submitClearTask(clearContextList);
+    }
+
     @Test
     // 击杀排行榜
     public void clearScoreRank() throws Exception {
@@ -66,23 +99,23 @@ public class LfClearDb {
         submitClearTask(clearContextList);
     }
 
+    // 清元旦活动组
+    @Test
+    public void clearFireworks() throws Exception {
+        List<Integer> serverIds = Arrays.asList(668);
+        List<String> skipTableList = Arrays.asList("server_info");
+        List<String> requiredTableList = Arrays.asList("activity_item", "user_active_drop_record",
+            "user_fireworks_wish", "fireworks_wish_pool", "user_score_rank");
+
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        submitClearTask(clearContextList);
+    }
+
     @Test
     public void clearAll() throws Exception {
         List<Integer> serverIds = Arrays.asList(671);
         List<String> skipTableList = Arrays.asList("server_info");
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, null);
-        submitClearTask(clearContextList);
-    }
-
-    @Test
-    // 小游戏大厅
-    public void clearMiniGameCenter() throws Exception {
-        List<Integer> serverIds = Arrays.asList(669);
-        List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList =
-            Arrays.asList("activity_item", "user_minigame_center", "user_flop_card", "gold_miner_act_record");
-
-        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
     }
 

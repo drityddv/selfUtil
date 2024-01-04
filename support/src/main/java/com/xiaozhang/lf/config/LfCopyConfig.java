@@ -26,8 +26,8 @@ public class LfCopyConfig extends LfUtil {
     @Test
     public void copyDevelop() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, Arrays.asList("intelligence.xml")));
-//        copyConfigContexts.add(LfCopyConfigContext.of(671, null, mergeServerXml, Arrays.asList("intelligence.xml")));
+        copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
+        // copyConfigContexts.add(LfCopyConfigContext.of(671, 668, mergeServerXml, Arrays.asList("intelligence.xml")));
         copyConfigs(copyConfigContexts);
     }
 
@@ -71,10 +71,11 @@ public class LfCopyConfig extends LfUtil {
     @Test
     public void copyMiniGameCenter() throws Exception {
         // List<String> skipXml = Arrays.asList("activity_panel.xml");
-        LfCopyConfigContext copyConfigContext1 = LfCopyConfigContext.of(669, null, null, null);
+        LfCopyConfigContext copyConfigContext1 = LfCopyConfigContext.of(669, "小游戏大厅配置", null, null);
+        LfCopyConfigContext copyConfigContext2 = LfCopyConfigContext.of(670, "小游戏大厅配置", null, null);
         // LfCopyConfigContext copyConfigContext2 = LfCopyConfigContext.of(670, "小游戏大厅配置", skipXml);
 
-        List<LfCopyConfigContext> copyConfigContexts = Arrays.asList(copyConfigContext1);
+        List<LfCopyConfigContext> copyConfigContexts = Arrays.asList(copyConfigContext1, copyConfigContext2);
         copyConfigs(copyConfigContexts);
     }
 
