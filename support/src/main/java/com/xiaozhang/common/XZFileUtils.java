@@ -83,10 +83,6 @@ public class XZFileUtils {
         return fileStream.collect(Collectors.toList());
     }
 
-    public static void moveFiles() {
-
-    }
-
     public static void readFile(String file) throws IOException {
         List<String> readLines = FileUtils.readLines(new File(file));
         List<String> create_table_sql_lines =

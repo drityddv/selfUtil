@@ -9,7 +9,6 @@ import org.apache.commons.math3.util.Pair;
 import org.junit.Test;
 
 import com.xiaozhang.lf.LfUtil;
-import com.xiaozhang.util.JsonUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,16 +25,21 @@ public class LfCopyConfig extends LfUtil {
     @Test
     public void copyDevelop() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
-        // copyConfigContexts.add(LfCopyConfigContext.of(671, 668, mergeServerXml, Arrays.asList("intelligence.xml")));
+         copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
+        copyConfigs(copyConfigContexts);
+    }
+    
+    @Test
+    public void copyModelMarket() throws Exception {
+        List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
+        copyConfigContexts.add(LfCopyConfigContext.of(671, "module_trade", mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 
     @Test
-    public void copyFireworks() throws Exception {
+    public void copyLotteryCards() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        copyConfigContexts.add(LfCopyConfigContext.of(669, "NewYear", mergeServerXml, null));
-        copyConfigContexts.add(LfCopyConfigContext.of(671, "NewYear", mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(669, "巅峰精准卡池", mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 
@@ -97,8 +101,12 @@ public class LfCopyConfig extends LfUtil {
             int serverId = copyConfigContext.getServerId();
             Set<String> skipFiles = copyConfigContext.getSkipFiles();
             Set<String> requiredFiles = copyConfigContext.getRequiredFiles();
-            Pair<String, String> resourcePath = LfUtil.getWorkSpaceResourcePath(serverId);
-            log.info("即将copy配置到目录:{}", JsonUtil.object2String(resourcePath));
+
+            if (copyConfigContext.needScp()) {
+                copyConfigContext.touchCache();
+            }
+
+            log.info("即将copy配置到服务器:{}", serverId);
             for (File xmlFile : xmlFiles) {
                 if (skipFiles.contains(xmlFile.getName())) {
                     log.info("skip文件:{}", xmlFile.getName());
@@ -110,13 +118,24 @@ public class LfCopyConfig extends LfUtil {
                     continue;
                 }
 
-                // 删除xmlFile文件
-                String resourcePathFirst = resourcePath.getFirst();
-                File desFile = new File(resourcePathFirst + xmlFile.getName());
-                FileUtils.copyFile(xmlFile, desFile);
-                // 删除desFile文件
+                if (copyConfigContext.needScp()) {
+                    File desFile = new File(copyConfigContext.getCache().getAbsolutePath() + "/" + xmlFile.getName());
+                    FileUtils.copyFile(xmlFile, desFile);
+                } else {
+                    Pair<String, String> resourcePath = LfUtil.getWorkSpaceResourcePath(serverId);
+                    String resourcePathFirst = resourcePath.getFirst();
+                    File desFile = new File(resourcePathFirst + xmlFile.getName());
+                    FileUtils.copyFile(xmlFile, desFile);
+                }
 
-                log.info("拷贝完成 :{}", desFile.getName());
+                log.info("拷贝完成 :{}", xmlFile.getName());
+            }
+
+            if (copyConfigContext.needScp()) {
+                String scpCommand = "scp " + copyConfigContext.getCache().getAbsolutePath() + "/*.xml" + " "
+                    + copyConfigContext.getScpPath();
+                log.warn("scpCommand:{}", scpCommand);
+                // RuntimeUtil.runCmd(scpCommand);
             }
         }
 

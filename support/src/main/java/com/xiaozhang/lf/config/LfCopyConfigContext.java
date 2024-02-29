@@ -1,5 +1,6 @@
 package com.xiaozhang.lf.config;
 
+import java.io.File;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,6 +18,14 @@ import lombok.Getter;
 public class LfCopyConfigContext {
     // svn地址
     private static final String svnPath = "/Users/xiaozhang/workspace/im30/lf2/cehua/resource_t/";
+    // 其他服务器id -> ip地址 scp过去
+    private static final Map<Integer, String> serverIdToPath = new HashMap<>();
+    // 提高scp效率 本地文件copy到临时目录 然后scp*.xml统一带过去 
+    private File cache = new File("/Users/xiaozhang/Downloads/cache/" + System.currentTimeMillis() + "/");
+
+    static {
+        serverIdToPath.put(672, "10.1.2.6");
+    }
 
     // 服务器id
     private int serverId;
@@ -50,4 +59,19 @@ public class LfCopyConfigContext {
         return svnPath;
     }
 
+    public boolean needScp() {
+        return serverIdToPath.containsKey(serverId);
+    }
+
+    public String getScpPath() {
+        return "root@" + serverIdToPath.get(serverId) + ":/usr/local/cok/SFS2X/extensions/LF672/resource";
+    }
+
+    public void touchCache() {
+        cache.mkdirs();
+    }
+
+    public File getCache() {
+        return cache;
+    }
 }

@@ -21,13 +21,30 @@ public class LfClearDb {
     private ExecutorService executorService = Executors.newFixedThreadPool(12);
     private CountDownLatch countDownLatch;
 
+    @Test
+    public void clearModelMarket() throws Exception {
+        List<Integer> serverIds = Arrays.asList(671);
+        List<String> skipTableList = Arrays.asList("server_info");
+        List<String> requiredTableList = Arrays.asList("user_model_market", "model_market_goods");
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        submitClearTask(clearContextList);
+    }
+
+    @Test
+    public void clearServerActivity() throws Exception {
+        List<Integer> serverIds = Arrays.asList(671);
+        List<String> skipTableList = Arrays.asList("server_info");
+        List<String> requiredTableList = Arrays.asList("server_activity_item");
+        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+        submitClearTask(clearContextList);
+    }
+
     // 小游戏大厅
     @Test
     public void clearMiniGameCenter() throws Exception {
-        List<Integer> serverIds = Arrays.asList(669,670);
+        List<Integer> serverIds = Arrays.asList(669, 670);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = new ArrayList<>(
-            Arrays.asList("activity_item", "user_minigame_center"));
+        List<String> requiredTableList = new ArrayList<>(Arrays.asList("activity_item", "user_minigame_center"));
 
         // 翻牌
         {
@@ -82,18 +99,6 @@ public class LfClearDb {
         List<Integer> serverIds = Arrays.asList(670, 671);
         List<String> skipTableList = Arrays.asList("server_info");
         List<String> requiredTableList = Arrays.asList("activity_item", "user_shining_score", "alliance_shining_score");
-
-        List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
-        submitClearTask(clearContextList);
-    }
-
-    @Test
-    // 五日任务
-    public void clearFiveDay() throws Exception {
-        List<Integer> serverIds = Arrays.asList(668);
-        List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = Arrays.asList("activity_item", "user_task", "user_day_task_act",
-            "user_day_task_act_record", "user_day_task_stage_reward");
 
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);

@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 public class LfClearDbContext {
     // mysql相关配置
-    private String mysqlHost = "jdbc:mysql://10.1.2.23:3306/lf";
+    private String mysqlHost = "jdbc:mysql://10.1.2.116:3306/lf";
     private String userName = "root";
     private String password = "admin123";
 
