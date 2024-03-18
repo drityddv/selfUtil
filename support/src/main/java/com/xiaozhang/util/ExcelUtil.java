@@ -18,9 +18,9 @@ public class ExcelUtil {
 
     @Test
     public void exportDD() throws Exception {
-        String excelUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023.08-2023.11/" + "张杰(小张).xlsx";
-        String imageUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023.08-2023.11/考勤截图";
-        String carBillUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023.08-2023.11/出租车发票拍照";
+        String excelUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023.12-2024.02/" + "张杰(小张).xlsx";
+        String imageUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023.12-2024.02/考勤截图";
+        String carBillUrl = "/Users/xiaozhang/Documents/im30/打车报销/2023.12-2024.02/出租车发票拍照";
         createExcelWithImage(excelUrl, imageUrl, carBillUrl);
     }
 

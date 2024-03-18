@@ -25,10 +25,11 @@ public class LfCopyConfig extends LfUtil {
     @Test
     public void copyDevelop() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-         copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(670, null, mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
-    
+
     @Test
     public void copyModelMarket() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();

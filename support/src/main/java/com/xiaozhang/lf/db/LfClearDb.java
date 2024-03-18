@@ -25,7 +25,7 @@ public class LfClearDb {
     public void clearModelMarket() throws Exception {
         List<Integer> serverIds = Arrays.asList(671);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = Arrays.asList("user_model_market", "model_market_goods");
+        List<String> requiredTableList = Arrays.asList("user_model_market","user_common_market", "model_market_goods","model_market_group");
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
     }
@@ -187,7 +187,7 @@ public class LfClearDb {
             }
             resultSet.close();
 
-            log.info("serverId :{} tables :{}", clearContext.getServerId(), tables);
+            log.info("serverId:{} tables :{}", clearContext.getServerId(), tables);
             MutableInt finishCount = new MutableInt();
             for (String table : tables) {
                 if (clearContext.getSkipTableList().contains(table)) {
