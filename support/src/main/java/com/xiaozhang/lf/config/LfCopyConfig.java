@@ -29,6 +29,7 @@ public class LfCopyConfig extends LfUtil {
         copyConfigContexts.add(LfCopyConfigContext.of(670, null, mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
+    
 
     @Test
     public void copyModelMarket() throws Exception {
