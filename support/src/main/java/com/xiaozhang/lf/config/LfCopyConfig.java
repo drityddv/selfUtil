@@ -37,6 +37,7 @@ public class LfCopyConfig extends LfUtil {
         copyConfigs(copyConfigContexts);
     }
 
+    
     @Test
     public void copyLotteryCards() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
