@@ -1,6 +1,6 @@
-package com.xiaozhang.spider.logs.model;
+package com.xiaozhang.spider.fflogs.model;
 
-import com.xiaozhang.spider.logs.constant.PlayerEnum;
+import com.xiaozhang.spider.fflogs.constant.PlayerEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

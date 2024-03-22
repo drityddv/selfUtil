@@ -1,8 +1,8 @@
-package com.xiaozhang.spider.logs.webmagic.processor;
+package com.xiaozhang.spider.fflogs.webmagic.processor;
 
-import com.xiaozhang.spider.logs.LogsSpiderStart;
-import com.xiaozhang.spider.logs.constant.LogsXpathEnum;
-import com.xiaozhang.spider.logs.model.GlobalFightReport;
+import com.xiaozhang.spider.fflogs.LogsSpiderStart;
+import com.xiaozhang.spider.fflogs.constant.LogsXpathEnum;
+import com.xiaozhang.spider.fflogs.model.GlobalFightReport;
 import com.xiaozhang.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import us.codecraft.webmagic.Page;

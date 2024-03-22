@@ -1,13 +1,13 @@
-package com.xiaozhang.spider.logs;
+package com.xiaozhang.spider.fflogs;
 
-import com.xiaozhang.spider.logs.constant.IniKeyEnum;
-import com.xiaozhang.spider.logs.constant.PlayerEnum;
-import com.xiaozhang.spider.logs.constant.PoiHeadEnum;
-import com.xiaozhang.spider.logs.model.GlobalFightReport;
-import com.xiaozhang.spider.logs.model.PhaseFightReport;
-import com.xiaozhang.spider.logs.model.PlayerDamageReport;
-import com.xiaozhang.spider.logs.webmagic.processor.DamagePageProcessor;
-import com.xiaozhang.spider.logs.webmagic.processor.GlobalPageProcessor;
+import com.xiaozhang.spider.fflogs.constant.IniKeyEnum;
+import com.xiaozhang.spider.fflogs.constant.PlayerEnum;
+import com.xiaozhang.spider.fflogs.constant.PoiHeadEnum;
+import com.xiaozhang.spider.fflogs.model.GlobalFightReport;
+import com.xiaozhang.spider.fflogs.model.PhaseFightReport;
+import com.xiaozhang.spider.fflogs.model.PlayerDamageReport;
+import com.xiaozhang.spider.fflogs.webmagic.processor.DamagePageProcessor;
+import com.xiaozhang.spider.fflogs.webmagic.processor.GlobalPageProcessor;
 import com.xiaozhang.util.FileUtil;
 import com.xiaozhang.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;

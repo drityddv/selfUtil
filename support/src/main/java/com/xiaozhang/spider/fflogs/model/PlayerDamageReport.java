@@ -1,4 +1,4 @@
-package com.xiaozhang.spider.logs.model;
+package com.xiaozhang.spider.fflogs.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -23,10 +23,18 @@ public class LfClearDb {
 
     @Test
     public void clearModelMarket() throws Exception {
+//        List<Integer> serverIds = Arrays.asList(671, 914, 915);
         List<Integer> serverIds = Arrays.asList(671);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = Arrays.asList("user_model_market","user_common_market", "model_market_goods","model_market_group");
+        List<String> requiredTableList =
+            Arrays.asList("user_model_market", "user_common_market", "model_market_goods", "model_market_group");
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
+
+        for (LfClearDbContext clearDbContext : clearContextList) {
+            if (clearDbContext.getServerId() == 914 || clearDbContext.getServerId() == 915) {
+                clearDbContext.setMysqlHost("jdbc:mysql://10.2.4.42:3306/lf");
+            }
+        }
         submitClearTask(clearContextList);
     }
 

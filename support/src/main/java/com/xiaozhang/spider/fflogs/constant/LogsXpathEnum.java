@@ -1,4 +1,4 @@
-package com.xiaozhang.spider.logs.constant;
+package com.xiaozhang.spider.fflogs.constant;
 
 import us.codecraft.webmagic.selector.Selectable;
 

@@ -1,10 +1,10 @@
-package com.xiaozhang.spider.logs.webmagic.processor;
+package com.xiaozhang.spider.fflogs.webmagic.processor;
 
-import com.xiaozhang.spider.logs.LogsSpiderStart;
-import com.xiaozhang.spider.logs.constant.LogsXpathEnum;
-import com.xiaozhang.spider.logs.constant.PlayerEnum;
-import com.xiaozhang.spider.logs.model.PhaseFightReport;
-import com.xiaozhang.spider.logs.model.PlayerDamageReport;
+import com.xiaozhang.spider.fflogs.LogsSpiderStart;
+import com.xiaozhang.spider.fflogs.constant.LogsXpathEnum;
+import com.xiaozhang.spider.fflogs.constant.PlayerEnum;
+import com.xiaozhang.spider.fflogs.model.PhaseFightReport;
+import com.xiaozhang.spider.fflogs.model.PlayerDamageReport;
 import lombok.extern.slf4j.Slf4j;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;

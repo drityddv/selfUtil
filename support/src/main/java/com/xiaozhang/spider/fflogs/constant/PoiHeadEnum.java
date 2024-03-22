@@ -1,7 +1,7 @@
-package com.xiaozhang.spider.logs.constant;
+package com.xiaozhang.spider.fflogs.constant;
 
-import com.xiaozhang.spider.logs.model.GlobalFightReport;
-import com.xiaozhang.spider.logs.model.PhaseFightReport;
+import com.xiaozhang.spider.fflogs.model.GlobalFightReport;
+import com.xiaozhang.spider.fflogs.model.PhaseFightReport;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.xiaozhang.spider.logs.model;
+package com.xiaozhang.spider.fflogs.model;
 
-import com.xiaozhang.spider.logs.LogsSpiderStart;
-import com.xiaozhang.spider.logs.constant.PhaseEnum;
+import com.xiaozhang.spider.fflogs.LogsSpiderStart;
+import com.xiaozhang.spider.fflogs.constant.PhaseEnum;
 import com.xiaozhang.util.JsonUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
