@@ -12,8 +12,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RuntimeUtil {
 
+    public static boolean scpFile(String srcFolder, String desFolder, String desIp) {
+        String scpCommand = generateShell(srcFolder, desFolder, desIp);
+        boolean success = runCmd(scpCommand);
+        if (!success) {
+            log.warn("scp file failed command:{}", scpCommand);
+        }
+        return success;
+    }
+
+    public static String generateShell(String srcFolder, String desFolder, String desIp) {
+        return "scp -r " + "\""+srcFolder + "\" " + "root@" + desIp + ":" + desFolder;
+    }
+
     public static boolean runCmd(String command) {
-        log.info("runCmd:{}", command);
+        log.info("runCmd: {}", command);
         // 启动进程并执行命令
         Process process = null;
         try {
@@ -29,17 +42,12 @@ public class RuntimeUtil {
 
             // 等待命令执行完成
             int exitCode = process.waitFor();
-            log.info("Command exited with code:{}", exitCode);
+            log.info("command finish result:[{}]", exitCode == 0 ? "success" : "failed");
         } catch (Exception e) {
             log.error("runCmd error", e);
             return false;
         }
         return true;
-    }
-    
-    public static void main(String[] args){
-        runCmd("scp /Users/xiaozhang/Downloads/cache/1706089502804/arena_team_stage.xml root@10.1.2.6:/root/workspace/lf/svn");
-//        runCmd("scp /Users/xiaozhang/Downloads/cache/1706089502804/*.xml root@10.1.2.6:/root/workspace/lf/svn");
     }
 
 }

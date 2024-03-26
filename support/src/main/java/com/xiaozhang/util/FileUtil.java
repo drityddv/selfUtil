@@ -52,11 +52,11 @@ public class FileUtil {
             if (file.isDirectory()) {
                 return;
             }
-            
-            if(!new SuffixFileFilter(extensions).accept(file)){
+
+            if (!new SuffixFileFilter(extensions).accept(file)) {
                 return;
             }
-            
+
             if (ioFileFilter != null) {
                 for (IOFileFilter fileFilter : ioFileFilter) {
                     if (!fileFilter.accept(file)) {
@@ -67,6 +67,11 @@ public class FileUtil {
             result.add(file);
         });
         return result;
+    }
+
+    public static File getResourceFile(String path) {
+        String file = FileUtil.class.getClassLoader().getResource(path).getFile();
+        return new File(file);
     }
 
 }

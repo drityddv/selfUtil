@@ -1,0 +1,4 @@
+[00:02:10]: [Join Announcement] xiao zhang
+[00:08:59]: [Announcement] BOSS【 龙蝇 】出现！，坐标：305, -235
+[00:12:05]: [Announcement] 〖 龙蝇 〗消失
+[00:17:43]: [Leave Announcement] xiao zhang
