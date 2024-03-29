@@ -1,0 +1,1 @@
+name = "Riko" description = "活泼而又好奇心旺盛的女孩子。\n见习探窟家。\n梦想追上母亲，成为传说中的探窟家“白笛”。" author = "Haori & Mario" version = "1.4" forumthread = "" priority = 1 api_version = 10 dst_compatible = true dont_starve_compatible = false reign_of_giants_compatible = false all_clients_require_mod = true  icon_atlas = "modicon.xml" icon = "modicon.tex" server_filter_tags = {"XZmodmaker",}

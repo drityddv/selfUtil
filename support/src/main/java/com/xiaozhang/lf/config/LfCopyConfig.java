@@ -31,9 +31,9 @@ public class LfCopyConfig extends LfUtil {
     }
 
     @Test
-    public void copyModelMarket() throws Exception {
+    public void copyMonopoly() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        copyConfigContexts.add(LfCopyConfigContext.of(671, "module_trade", mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(671, "Monopoly", mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 

@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LFCopyBeanMapper extends LfUtil {
 
     @Test
-    public void copy669() {
+    public void copyMapper() {
         copyLfMappers(671);
     }
 }

@@ -1,0 +1,1 @@
+Building 'c:\DoNotStarveTogetherStaging\mod_tools\win32\..\..\mods\soulmates/exported\myprefab\bindingring_build.scml'.

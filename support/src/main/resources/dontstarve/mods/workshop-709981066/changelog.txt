@@ -1,0 +1,15 @@
+Tenshi Hinanawi | Touhou Project
+
+Changelog (Last Update: 28.12.2016 - Version 1.2.8)
+
+Version 1.0.0 - Uploaded to Steam Workshop.
+Version 1.0.1 - Various tweaks and fixes.
+Version 1.1.0 - Uploaded the correct build of the mod, whoops.
+Version 1.1.1 - Fixed random inconsistent stats boosts.
+Version 1.2.0 - Fixed mod files not updating properly, sorry.
+Version 1.2.6 - Updated for newer versions of the game.
+Version 1.2.8 - Minor tweaks for better compatibility with the "A New Reign" update.
+
+Current Mod Version: [1.2.8]
+DST Character Mod created by: Senshimi [https://steamcommunity.com/id/Senshimi/]
+Touhou Project Collection: [http://steamcommunity.com/sharedfiles/filedetails/?id=701414094]

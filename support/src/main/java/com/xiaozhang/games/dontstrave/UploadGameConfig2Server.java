@@ -17,14 +17,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UploadGameConfig2Server {
 
-    // 服务器 ip
+    // 服务器 ip 先走内网scp 公网再说吧
     public static final String linux_server_ip = "10.1.2.84";
     // 服务器 游戏数据文件夹
     public static final String linux_game_data_path =
         "/usr/local/zhang/software/games/dontstarve/mount/DoNotStarveTogether/Cluster_1";
+    // 服务器mod文件夹 [目前往挂载目录和运行目录都传一份吧,貌似是因为启动脚本没有配置mod订阅信息不会从挂载目录加载... 蛋疼的设计]
+    public static final String server_mod_path =
+        "\"/usr/local/zhang/software/games/dontstarve/mount/Steam/steamapps/common/Don\\'t\\ Starve\\ Together\\ Dedicated\\ Server/mods\"";
     // 本地mod文件夹
     public static final String local_mods_path =
-        "/Users/xiaozhang/Library/Application Support/Steam/steamapps/common/Don't Starve Together/dontstarve_steam.app/Contents/mods";
+        "/Users/xiaozhang/workspace/java/utils/support/src/main/resources/dontstarve/mods";
     // 地上洞穴是两个世界
     public static final List<String> worldNames = Arrays.asList("Master", "Caves");
     // 世界配置文件
@@ -42,7 +45,10 @@ public class UploadGameConfig2Server {
         scpCommand.add(backUpCmd);
 
         // 先上传mod文件
-        String scpModCommand = RuntimeUtil.generateShell(local_mods_path, linux_game_data_path, linux_server_ip);
+        String scpModCommand = RuntimeUtil.generateShell(local_mods_path, server_mod_path, linux_server_ip);
+        scpCommand.add(scpModCommand);
+        scpModCommand = RuntimeUtil.generateShell(local_mods_path,
+            "\"/usr/local/zhang/software/games/dontstarve/mount/DoNotStarveTogether/Cluster_1/\"", linux_server_ip);
         scpCommand.add(scpModCommand);
 
         // Arrays.asList("Master", "Caves");
