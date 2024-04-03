@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class UploadGameConfig2Server {
+    
+    public static final boolean synConfig = false;
 
     // 服务器 ip 先走内网scp 公网再说吧
     public static final String linux_server_ip = "10.1.2.84";
@@ -50,15 +52,17 @@ public class UploadGameConfig2Server {
         scpModCommand = RuntimeUtil.generateShell(local_mods_path,
             "\"/usr/local/zhang/software/games/dontstarve/mount/DoNotStarveTogether/Cluster_1/\"", linux_server_ip);
         scpCommand.add(scpModCommand);
-
-        // Arrays.asList("Master", "Caves");
-        for (String worldName : worldNames) {
-            File worldFile = FileUtil.getResourceFile("dontstarve/Cluster_1/" + worldName);
-            for (String configFile : worldConfigFiles) {
-                String worldConfigFile = worldFile.getAbsolutePath() + "/" + configFile;
-                String remotePath = linux_game_data_path + "/" + worldName;
-                String generateShell = RuntimeUtil.generateShell(worldConfigFile, remotePath, linux_server_ip);
-                scpCommand.add(generateShell);
+        
+        if(synConfig) {
+            // Arrays.asList("Master", "Caves");
+            for (String worldName : worldNames) {
+                File worldFile = FileUtil.getResourceFile("dontstarve/Cluster_1/" + worldName);
+                for (String configFile : worldConfigFiles) {
+                    String worldConfigFile = worldFile.getAbsolutePath() + "/" + configFile;
+                    String remotePath = linux_game_data_path + "/" + worldName;
+                    String generateShell = RuntimeUtil.generateShell(worldConfigFile, remotePath, linux_server_ip);
+                    scpCommand.add(generateShell);
+                }
             }
         }
 

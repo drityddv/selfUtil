@@ -26,7 +26,7 @@ public class LfCopyConfig extends LfUtil {
     public void copyDevelop() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
 //        copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
-        copyConfigContexts.add(LfCopyConfigContext.of(671, null, mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 
