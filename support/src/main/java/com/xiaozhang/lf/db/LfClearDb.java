@@ -23,11 +23,11 @@ public class LfClearDb {
 
     @Test
     public void clearModelMarket() throws Exception {
-//        List<Integer> serverIds = Arrays.asList(671, 914, 915);
+        //        List<Integer> serverIds = Arrays.asList(671, 914, 915);
         List<Integer> serverIds = Arrays.asList(671);
         List<String> skipTableList = Arrays.asList("server_info");
         List<String> requiredTableList =
-            Arrays.asList("user_model_market", "user_common_market", "model_market_goods", "model_market_group");
+                Arrays.asList("user_model_market", "user_common_market", "model_market_goods", "model_market_group");
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
 
         for (LfClearDbContext clearDbContext : clearContextList) {
@@ -47,34 +47,12 @@ public class LfClearDb {
         submitClearTask(clearContextList);
     }
 
-    // 小游戏大厅
+    // 清理monopoly
     @Test
-    public void clearMiniGameCenter() throws Exception {
-        List<Integer> serverIds = Arrays.asList(669, 670);
+    public void clearMonopoly() throws Exception {
+        List<Integer> serverIds = Arrays.asList(671);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = new ArrayList<>(Arrays.asList("activity_item", "user_minigame_center"));
-
-        // 翻牌
-        {
-            requiredTableList.add("user_flop_card");
-        }
-
-        // 纳特寻宝
-        {
-            requiredTableList.add("gold_miner_act_record");
-        }
-
-        // 羊了个羊
-        {
-            requiredTableList.add("user_block_info");
-            requiredTableList.add("user_stage_info");
-        }
-
-        // 守护堡垒
-        {
-            requiredTableList.add("user_merge_cannon");
-        }
-
+        List<String> requiredTableList = new ArrayList<>(Arrays.asList("server_activity_item", "user_monopoly"));
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
     }
@@ -103,10 +81,10 @@ public class LfClearDb {
 
     @Test
     // 闪耀之光
-    public void clearShiningScore() throws Exception {
-        List<Integer> serverIds = Arrays.asList(670, 671);
+    public void clearAllianceBoss() throws Exception {
+        List<Integer> serverIds = Arrays.asList(670);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = Arrays.asList("activity_item", "user_shining_score", "alliance_shining_score");
+        List<String> requiredTableList = Arrays.asList("alliance_boss_round");
 
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
@@ -118,7 +96,7 @@ public class LfClearDb {
         List<Integer> serverIds = Arrays.asList(668);
         List<String> skipTableList = Arrays.asList("server_info");
         List<String> requiredTableList = Arrays.asList("activity_item", "user_active_drop_record",
-            "user_fireworks_wish", "fireworks_wish_pool", "user_score_rank");
+                "user_fireworks_wish", "fireworks_wish_pool", "user_score_rank");
 
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
@@ -145,7 +123,7 @@ public class LfClearDb {
     }
 
     private List<LfClearDbContext> generateClearContext(List<Integer> serverIdList, List<String> skipTableList,
-        List<String> requiredTableList) {
+                                                        List<String> requiredTableList) {
         List<LfClearDbContext> result = new ArrayList<>();
         for (Integer serverId : serverIdList) {
             LfClearDbContext clearContext = LfClearDbContext.of(serverId, skipTableList, requiredTableList);
@@ -175,7 +153,7 @@ public class LfClearDb {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // 建立数据库连接
             conn = DriverManager.getConnection(clearContext.getUrl(), clearContext.getUserName(),
-                clearContext.getPassword());
+                    clearContext.getPassword());
             // 创建执行 SQL 语句的 Statement 对象
             Statement statement = conn.createStatement();
             // 执行 SQL 查询
@@ -206,7 +184,7 @@ public class LfClearDb {
                     statement.execute(sql);
                     finishCount.add(1);
                     log.info("serverId:{} 进度{}% {} ", clearContext.getServerId(),
-                        (int)(finishCount.getValue() * 1.0d / tables.size() * 100), table);
+                            (int) (finishCount.getValue() * 1.0d / tables.size() * 100), table);
                 } catch (Exception e) {
                     log.error("table:[{}] clear failed...", table);
                 }

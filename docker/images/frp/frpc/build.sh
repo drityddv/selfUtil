@@ -1,0 +1,1 @@
+ docker build -t frpc:0.53.2 .  

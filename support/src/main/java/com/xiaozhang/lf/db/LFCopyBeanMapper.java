@@ -16,6 +16,6 @@ public class LFCopyBeanMapper extends LfUtil {
 
     @Test
     public void copyMapper() {
-        copyLfMappers(671);
+        copyLfMappers(670);
     }
 }

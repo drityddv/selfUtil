@@ -1,0 +1,1 @@
+docker tag frpc:0.53.2 ddvddv/frpc:0.53.2 
