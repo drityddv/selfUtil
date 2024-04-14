@@ -1,0 +1,34 @@
+[[proxies]]
+name = "dontstarve0"
+type = "udp"
+localIP = "0.0.0.0"
+localPort = 10998
+remotePort = 10998
+
+[[proxies]]
+name = "dontstarve1"
+type = "udp"
+localIP = "0.0.0.0"
+localPort = 10999
+remotePort = 10999
+
+[[proxies]]
+name = "dontstarve2"
+type = "udp"
+localIP = "0.0.0.0"
+localPort = 11000
+remotePort = 11000
+
+[[proxies]]
+name = "dontstarve3"
+type = "udp"
+localIP = "0.0.0.0"
+localPort = 12346
+remotePort = 12346
+
+[[proxies]]
+name = "dontstarve4"
+type = "udp"
+localIP = "0.0.0.0"
+localPort = 12347
+remotePort = 12347
