@@ -47,9 +47,9 @@ public class LfCopyConfig extends LfUtil {
     }
 
     @Test
-    public void copyLotteryCards() throws Exception {
+    public void copyActScene() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        copyConfigContexts.add(LfCopyConfigContext.of(669, "巅峰精准卡池", mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(669, "Anniversary2nd", mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 
