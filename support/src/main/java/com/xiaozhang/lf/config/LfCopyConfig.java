@@ -26,7 +26,7 @@ public class LfCopyConfig extends LfUtil {
     public void copyDevelop() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
         // copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
-        copyConfigContexts.add(LfCopyConfigContext.of(670, null, mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 
@@ -34,7 +34,7 @@ public class LfCopyConfig extends LfUtil {
     @Test
     public void copyAllianceBoss() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        // copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
+         copyConfigContexts.add(LfCopyConfigContext.of(668, "联盟BOSS", mergeServerXml, null));
         copyConfigContexts.add(LfCopyConfigContext.of(670, "联盟BOSS", mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
