@@ -1,0 +1,1 @@
+docker run --name wordpress --link mysql -p 10000:80 wordpress

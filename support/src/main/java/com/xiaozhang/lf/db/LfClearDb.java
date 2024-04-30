@@ -80,11 +80,10 @@ public class LfClearDb {
     }
 
     @Test
-    // 闪耀之光
     public void clearAllianceBoss() throws Exception {
-        List<Integer> serverIds = Arrays.asList(670);
+        List<Integer> serverIds = Arrays.asList(668,670);
         List<String> skipTableList = Arrays.asList("server_info");
-        List<String> requiredTableList = Arrays.asList("alliance_boss_round");
+        List<String> requiredTableList = Arrays.asList("alliance_boss_round","alliance_boss_alliance_info","user_alliance_boss");
 
         List<LfClearDbContext> clearContextList = generateClearContext(serverIds, skipTableList, requiredTableList);
         submitClearTask(clearContextList);
