@@ -31,7 +31,7 @@ public class FinalFantasyService implements SmartLifecycle {
     @SneakyThrows
     @Override
     public void start() {
-        log.info("ff14 service start...");
+//        log.info("ff14 service start...");
         // ClassPathResource classResource = new ClassPathResource(Ff14Util.PATH + Ff14Util.JUE_LONG_SHI);
         // PoiUtils.read(classResource.getFile());
     }

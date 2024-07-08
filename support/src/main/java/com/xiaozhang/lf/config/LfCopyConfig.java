@@ -25,33 +25,39 @@ public class LfCopyConfig extends LfUtil {
     @Test
     public void copyDevelop() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        // copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
-        copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
-        copyConfigContexts.add(LfCopyConfigContext.of(670, null, mergeServerXml, null));
-//        copyConfigContexts.add(LfCopyConfigContext.of(671, null, mergeServerXml, null));
-        copyConfigs(copyConfigContexts);
-    }
-
-    // 联盟boss
-    @Test
-    public void copyAllianceBoss() throws Exception {
-        List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-         copyConfigContexts.add(LfCopyConfigContext.of(668, "联盟BOSS", mergeServerXml, null));
-        copyConfigContexts.add(LfCopyConfigContext.of(670, "联盟BOSS", mergeServerXml, null));
+//         copyConfigContexts.add(LfCopyConfigContext.of(668, null, mergeServerXml, null));
+         copyConfigContexts.add(LfCopyConfigContext.of(669, null, mergeServerXml, null));
+//        copyConfigContexts.add(LfCopyConfigContext.of(670, null, mergeServerXml, null));
+        // copyConfigContexts.add(LfCopyConfigContext.of(671, null, mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 
     @Test
-    public void copyMonopoly() throws Exception {
+    // 8月活动组
+    public void copyAugust() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        copyConfigContexts.add(LfCopyConfigContext.of(671, "Monopoly", mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(670, "ActAugust", mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 
     @Test
-    public void copyActScene() throws Exception {
+    public void copyMiniGame() throws Exception {
         List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
-        copyConfigContexts.add(LfCopyConfigContext.of(669, "Anniversary2nd", mergeServerXml, null));
+        copyConfigContexts.add(LfCopyConfigContext.of(669, "minigame", mergeServerXml, null));
+        copyConfigs(copyConfigContexts);
+    }
+
+    @Test
+    public void copyLogin() throws Exception {
+        List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
+        copyConfigContexts.add(LfCopyConfigContext.of(670, "黑名单", mergeServerXml, null));
+        copyConfigs(copyConfigContexts);
+    }
+
+    @Test
+    public void copyAllianceBp() throws Exception {
+        List<LfCopyConfigContext> copyConfigContexts = new ArrayList<>();
+        copyConfigContexts.add(LfCopyConfigContext.of(668, "联盟BP测试", mergeServerXml, null));
         copyConfigs(copyConfigContexts);
     }
 

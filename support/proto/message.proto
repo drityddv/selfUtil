@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "com.xiaozhang.core.net.server";
+option java_outer_classname = "MessageDemoProto";
+
+message MessageRequest {
+  string content = 1;
+  int32 intParam = 2;
+  int64 longParam = 3;
+}
+
+message MessageResponse {
+  string content = 1;
+  int32 intParam = 2;
+  int64 longParam = 3;
+}

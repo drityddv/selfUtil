@@ -26,7 +26,28 @@ import lombok.extern.slf4j.Slf4j;
 public class MacUtils {
 
     public static void main(String[] args) throws Exception {
-        exportZhouJieLun();
+        test();
+    }
+
+    public static void test() throws IOException {
+        List<String> lines = FileUtils.readLines(new File("/Users/xiaozhang/Documents/草稿纸3.txt"));
+
+        // 检测是否包含数字
+        Pattern pattern = Pattern.compile("[0-9]");
+        List<String> versionJars = lines.stream().filter(s -> pattern.matcher(s).find()).collect(Collectors.toList());
+        log.info("{}", versionJars);
+
+        // 不包含版本的jar
+        List<String> unVersionJars =
+            lines.stream().filter(s -> !pattern.matcher(s).find()).collect(Collectors.toList());
+        log.info("{}", unVersionJars);
+
+        List<String> filelines = new ArrayList<>();
+        filelines.addAll(versionJars);
+        filelines.addAll(unVersionJars);
+
+        FileUtils.writeLines(new File("/Users/xiaozhang/Documents/线上jar.txt"), filelines);
+
     }
 
     private static void jiHuang() throws IOException {

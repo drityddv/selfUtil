@@ -71,7 +71,7 @@ public class LfClearDb {
     @Test
     // 联盟bp
     public void clearAllianceBp() throws Exception {
-        List<Integer> serverIds = Arrays.asList(669);
+        List<Integer> serverIds = Arrays.asList(668);
         List<String> skipTableList = Arrays.asList("server_info");
         List<String> requiredTableList = Arrays.asList("activity_item", "alliance_bp", "user_alliance_bp");
 

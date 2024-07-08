@@ -14,13 +14,33 @@ public class Main {
 
     public static final Main main = new Main();
 
-    public static void main(String[] args) {
-        String str = "abc";
-        Object result = main.validPalindrome(str);
-        log.info("{}", result);
+    public static List<int[]> divideXAxis(int totalLength, int numPartitions) {
+        int baseLength = totalLength / numPartitions; // 每份的基础长度
+        int extraLength = totalLength % numPartitions; // 多出来的长度
+        List<int[]> partitions = new ArrayList<>();
+        int start = 0;
+        int end = baseLength;
+        for (int i = 0; i < numPartitions; i++) {
+            // 如果还有多余的长度，则将其分配给当前分段
+            if (extraLength > 0) {
+                end += 1;
+                extraLength -= 1;
+            }
+            partitions.add(new int[]{start, end});
+            start = end;
+            end += baseLength;
+        }
+        return partitions;
     }
 
-
+    public static void main(String[] args) {
+        List<int[]> xPartitions = divideXAxis(11, 4);
+        for (int i = 0; i < xPartitions.size(); i++) {
+            int[] partition = xPartitions.get(i);
+            System.out.println("Partition " + (i + 1) + ": [" + partition[0] + ", " + partition[1] + "]");
+        }
+    }
+    
     public boolean validPalindrome(String s) {
         return validPalindrome1(s.toCharArray(), 0, s.length() - 1, true);
     }
