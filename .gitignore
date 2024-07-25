@@ -27,6 +27,7 @@
 /target/
 /logs统计.xlsx
 /report.txt
+/support/target/
 /support/target/classes/application.properties
 /support/target/classes/webdriver/chromedriver_win32.zip
 /support/target/classes/config/webmagic/config.ini
